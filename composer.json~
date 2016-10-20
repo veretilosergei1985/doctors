@@ -17,7 +17,13 @@
 		"php": ">=5.4.0",
 		"yiisoft/yii2": "*",
 		"yiisoft/yii2-bootstrap": "*",
-		"yiisoft/yii2-swiftmailer": "*"
+		"yiisoft/yii2-swiftmailer": "*",
+		"almasaeed2010/adminlte": "~2.0",
+		"dmstr/yii2-adminlte-asset": "2.*",
+		"kartik-v/yii2-grid": "@dev",
+		"kartik-v/yii2-mpdf": "*",
+		"kartik-v/yii2-editable": "@dev",
+		"kartik-v/yii2-widget-colorinput": "@dev"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",

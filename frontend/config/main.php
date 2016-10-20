@@ -28,6 +28,18 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => true,
+            'rules' => [
+                '/' => 'site/index',
+                'specialities' => 'speciality/index',
+                'doctors' => 'doctor/index',
+                'search' => 'site/search',
+
+            ],
+        ],
     ],
     'params' => $params,
 ];

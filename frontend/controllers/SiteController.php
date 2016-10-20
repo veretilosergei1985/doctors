@@ -29,7 +29,7 @@ class SiteController extends Controller
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup', 'search'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -167,5 +167,9 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionSearch() {
+        echo "123"; exit;
     }
 }

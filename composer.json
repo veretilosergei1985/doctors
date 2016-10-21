@@ -27,7 +27,8 @@
 		"2amigos/yii2-ckeditor-widget": "^2.0",
 		"mihaildev/yii2-ckeditor": "*",
 		"kartik-v/yii2-widgets": "*",
-		"kartik-v/yii2-widget-select2": "@dev"
+		"kartik-v/yii2-widget-select2": "@dev",
+		"voskobovich/yii2-many-many-behavior": "~3.0"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",

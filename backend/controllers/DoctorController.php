@@ -10,6 +10,7 @@ use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 class DoctorController extends Controller
 {
@@ -134,27 +135,11 @@ class DoctorController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->saveRelations();
 
-            $education = $model->education;
-            $education->load(Yii::$app->request->post());
-            $model->setEducation($education);
-            $education->save();
-
-            $specialities = $model->specialities;
-//            //echo "<pre>"; print_r($specialities); exit;
-            //$specialities->load(Yii::$app->request->post());
-            $model->setSpecialities(Yii::$app->request->post('Specialities'));
-//            $specialities->save();
-
-            //$model->unlinkAll('specialities', $specialities);
-//            $specialities = new Speciality();
-//            $specialities->load(Yii::$app->request->post());
-//            $model->link('specialities', $specialities);
-
-//            $model->children = $_POST['Child'];
-//        if ($model->saveWithRelated('children'))
-
+            $model->file = UploadedFile::getInstance($model, 'file');
+            echo "<pre>"; var_dump(UploadedFile::getInstance($model, 'file')); exit;
 
             return $this->redirect(['update', 'id' => $model->id]);
         } else {

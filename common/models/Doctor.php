@@ -13,9 +13,11 @@ use Yii;
  * @property string $last_name
  * @property string $title
  * @property string $description
+ * @property string $image
  */
 class Doctor extends \yii\db\ActiveRecord
 {
+    public $file;
     /**
      * @inheritdoc
      */
@@ -33,6 +35,7 @@ class Doctor extends \yii\db\ActiveRecord
             [['first_name', 'middle_name', 'last_name', 'title', 'description'], 'required'],
             [['description'], 'string'],
             [['first_name', 'middle_name', 'last_name', 'title'], 'string', 'max' => 255],
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -87,15 +90,19 @@ class Doctor extends \yii\db\ActiveRecord
         return $this->hasOne(Course::className(), ['doctor_id' => 'id']);
     }
 
-    public function afterSave($insert)
+    public function saveRelations()
     {
-        $relatedRecords = $this->getRelatedRecords();
-
-        //echo "<pre>"; print_r($this->getRelatedRecords()); exit;
-        if (isset($relatedRecords['specialities'])) {
-            foreach ($relatedRecords['specialities'] as $speciality) {
-                $this->link('specialities', $speciality);
+        $this->unlinkAll('specialities', true);
+        $specialities = Yii::$app->request->post('Doctor')['specialities'];
+        if (!empty($specialities)) {
+            foreach ($specialities as $speciality) {
+                Yii::$app->db->createCommand()->batchInsert('doctor_speciality', ['doctor_id', 'speciality_id'], [[$this->primaryKey, $speciality]])->execute();
             }
         }
+
+        $education = $this->education;
+        $education->load(Yii::$app->request->post());
+        $this->setEducation($education);
+        $education->save();
     }
 }

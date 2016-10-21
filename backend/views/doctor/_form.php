@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\ArrayHelper;
+use kartik\widgets\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Doctor */
@@ -12,7 +13,7 @@ use yii\helpers\ArrayHelper;
 
 <div class="doctor-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
 
     <div class="row">
         <div class="col-md-5 col-sm-5 col-xs-5">
@@ -26,13 +27,16 @@ use yii\helpers\ArrayHelper;
 
             <?= $form->field($model, 'description')->widget(CKEditor::className(),[
                 'editorOptions' => ['preset' => 'standard'],
-                'options' => ['rows' => 3, 'height' => 200],
+            ]); ?>
+
+            <?= $form->field($model, 'details')->widget(CKEditor::className(),[
+                'editorOptions' => ['preset' => 'standard'],
             ]); ?>
 
             <?= $form->field($model->education, 'description')->widget(CKEditor::className(),[
                 'editorOptions' => ['preset' => 'standard'],
                 'options' => ['rows' => 3],
-            ]); ?>
+            ])->label('Education'); ?>
         </div>
 
         <div class="col-md-5 col-sm-5 col-xs-5">
@@ -47,6 +51,12 @@ use yii\helpers\ArrayHelper;
                 'allowClear' => true
             ],
             ]); ?>
+
+            <?= $form->field($model, 'file')->widget(FileInput::classname(), [
+                    'options' => ['accept' => 'image/*'],
+                ]);
+            ?>
+
         </div>
     </div>
 

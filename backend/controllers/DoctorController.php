@@ -11,6 +11,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\helpers\Json;
 
 class DoctorController extends Controller
 {
@@ -28,7 +29,7 @@ class DoctorController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'info', 'update'],
+                        'actions' => ['logout', 'index', 'info', 'update', 'delete-image'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -136,13 +137,22 @@ class DoctorController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->saveRelations();
-
             $model->file = UploadedFile::getInstance($model, 'file');
-            echo "<pre>"; var_dump(UploadedFile::getInstance($model, 'file')); exit;
-
+            if($model->validate() && $model->save()) {
+                $model->saveRelations();
+                if ($model->file) {
+                    $path = Yii::getAlias('@frontend') . '/web/uploads/doctors/' . $model->primaryKey;
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777);
+                    }
+                    $model->file->saveAs($path . '/image.jpg');
+                    $model->image = 'image.jpg';
+                    $model->save(false);
+                }
+            }
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
+            //echo "<pre>"; var_dump($model->getErrors()); exit;
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -176,5 +186,20 @@ class DoctorController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    public function actionDeleteImage() {    
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $request = Yii::$app->request;
+            $doctorId = $request->post('doctorId');
+            $model = $this->findModel($doctorId);
+            //$model->image = null;
+            if($model->save(false)) {
+                echo Json::encode([                    
+                    'success' => true,
+                ]);
+                Yii::$app->end();
+            }
+        }        
     }
 }

@@ -13,7 +13,7 @@ class m161019_162450_populate_education_table extends Migration
             'description' => $this->text(),
         ]);
 
-        $this->addForeignKey("education_fk", "education", "doctor_id", "doctor", "id", "CASCADE", "CASCADE");
+        //$this->addForeignKey("education_fk", "education", "doctor_id", "doctor", "id");
     }
 
     public function down()

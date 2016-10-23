@@ -37,7 +37,7 @@ return [
                 'specialities' => 'speciality/index',
                 'doctors' => 'doctor/index',
                 'search' => 'site/search',
-
+                'site/signup' => 'site/signup',    
             ],
         ],
     ],

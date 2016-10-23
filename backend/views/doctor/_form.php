@@ -11,7 +11,7 @@ use kartik\widgets\FileInput;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="doctor-form">
+<div class="doctor-form" doctor-id="<?= $model->primaryKey; ?>">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
 
@@ -52,9 +52,27 @@ use kartik\widgets\FileInput;
             ],
             ]); ?>
 
-            <?= $form->field($model, 'file')->widget(FileInput::classname(), [
+            <?php $options = [
                     'options' => ['accept' => 'image/*'],
-                ]);
+                    'pluginOptions' => [
+                        'showRemove' => false,
+                        'showUpload' => false,
+                        'initialPreviewAsData' => true,
+                        'initialCaption' => "",
+                        'removeIcon' => '<i id="remove-doctor-image" class="glyphicon glyphicon-trash"></i> ',
+                        'initialPreviewConfig' => [
+                            ['caption' => 'image.jpg']
+                        ],
+                        'overwriteInitial'=>false,
+                    ]
+                ];
+            
+                if (!empty($model->image)) {
+                    $options['pluginOptions']['initialPreview'] = [Yii::$app->params['frontendBaseUrl'] . '/uploads/doctors/' . $model->primaryKey . '/image.jpg'];
+                }
+            ?>
+            
+            <?= $form->field($model, 'file')->widget(FileInput::classname(), $options);
             ?>
 
         </div>

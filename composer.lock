@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b6f3e36a7c931eaeea92224d7417b853",
+    "hash": "e45fc0fcd86a91fcf2de44febd5df3e3",
     "content-hash": "00990a75587d24dee0f621a36c7f50d4",
     "packages": [
         {
@@ -122,7 +122,7 @@
                 "shasum": ""
             },
             "require": {
-                "bower-asset/jquery": ">=1.9.1,<4.0"
+                "bower-asset/jquery": ">=1.9.1,<=3"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -890,12 +890,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-grid.git",
-                "reference": "a7d8fed3485720a8b17614685216a43f69c4224d"
+                "reference": "448db13904dad68153ef466bbc905b916a2a5900"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/a7d8fed3485720a8b17614685216a43f69c4224d",
-                "reference": "a7d8fed3485720a8b17614685216a43f69c4224d",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/448db13904dad68153ef466bbc905b916a2a5900",
+                "reference": "448db13904dad68153ef466bbc905b916a2a5900",
                 "shasum": ""
             },
             "require": {
@@ -932,7 +932,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-10-21 07:44:15"
+            "time": "2016-10-22 16:52:42"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -2378,12 +2378,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "80c9c576c6fdda71f6a1630efbc623c362313e4d"
+                "reference": "ff8d51b269f3dc516fa0f034f4b455ad7842f353"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/80c9c576c6fdda71f6a1630efbc623c362313e4d",
-                "reference": "80c9c576c6fdda71f6a1630efbc623c362313e4d",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ff8d51b269f3dc516fa0f034f4b455ad7842f353",
+                "reference": "ff8d51b269f3dc516fa0f034f4b455ad7842f353",
                 "shasum": ""
             },
             "require": {
@@ -2464,7 +2464,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-10-21 09:49:22"
+            "time": "2016-10-21 14:48:52"
         },
         {
             "name": "yiisoft/yii2-bootstrap",

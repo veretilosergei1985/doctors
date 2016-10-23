@@ -12,7 +12,7 @@ class m161020_102405_populate_course_table extends Migration
             'description' => $this->text(),
         ]);
 
-        $this->addForeignKey("course_fk", "course", "doctor_id", "doctor", "id", "CASCADE", "CASCADE");
+        //$this->addForeignKey("course_fk", "course", "doctor_id", "doctor", "id", "CASCADE", "CASCADE");
     }
 
     public function down()

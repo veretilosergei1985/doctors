@@ -35,7 +35,7 @@ class Doctor extends \yii\db\ActiveRecord
             [['first_name', 'middle_name', 'last_name', 'title', 'description'], 'required'],
             [['description'], 'string'],
             [['first_name', 'middle_name', 'last_name', 'title'], 'string', 'max' => 255],
-            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['file'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
 

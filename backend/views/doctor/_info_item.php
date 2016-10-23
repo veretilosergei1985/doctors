@@ -7,11 +7,9 @@
     <p class="doctor-title">
     <strong>Описание</strong>
     </p>
-    <ul class="doctor-list">
-        <li>
-            <?php echo $doctor->description; ?></br>
-        </li>
-    </ul>
+    <p>
+       <?php echo $doctor->description; ?></br>
+    </p>
 
     <hr class="dotted">
 
@@ -19,12 +17,9 @@
         <p class="doctor-title">
             <strong>Образование</strong>
         </p>
-        <ul class="doctor-list">
-            <li>
-                <?php echo $doctor->education->description; ?></br>
-            </li>
-        </ul>
-
+        <p>
+        <?php echo $doctor->education->description; ?></br>
+        </p>
         <hr class="dotted">
     <?php } ?>
 
@@ -32,12 +27,9 @@
         <p class="doctor-title">
             <strong>Курсы</strong>
         </p>
-        <ul class="doctor-list">
-            <li>
-                <?php echo $doctor->course->description; ?></br>
-            </li>
-        </ul>
-
+        <p>
+            <?php echo $doctor->course->description; ?></br>
+        </p>
         <hr class="dotted">
     <?php } ?>
 

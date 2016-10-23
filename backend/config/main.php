@@ -38,6 +38,9 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'thumbnail' => [
+            'class' => 'sadovojav\image\Thumbnail',
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -48,6 +51,7 @@ return [
 //                'site/login' => 'site/login',
                 'doctors' => 'doctor/index',
                 'doctor/info/<id:\d+>' => 'doctor/info',
+                'doctor/delete-image' => 'doctor/delete-image'
             ],
         ],
     ],

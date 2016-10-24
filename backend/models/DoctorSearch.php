@@ -21,7 +21,7 @@ class DoctorSearch extends Doctor
     {
         return [
             [['id'], 'integer'],
-            [['first_name', 'middle_name', 'last_name', 'title', 'description', 'experience', 'image', 'fullName', 'specialities'], 'safe'],
+            [['first_name', 'middle_name', 'last_name', 'title', 'description', 'details', 'education', 'association', 'course', 'image', 'fullName', 'specialities'], 'safe'],
         ];
     }
 

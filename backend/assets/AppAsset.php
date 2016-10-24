@@ -17,9 +17,13 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $css = ['css/site.css'];
+    public $css = [
+        'css/site.css',
+        'js/plugins/multi-select/css/multi-select.css'
+    ];
     public $js = [
-        'js/doctor-backend.js'
+        'js/doctor-backend.js',
+        'js/plugins/multi-select/js/jquery.multi-select.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

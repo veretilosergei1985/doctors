@@ -28,6 +28,9 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'request'   => [
+            'cookieValidationKey'   => 'dsfsydf78sd8fhw8yfdbw8y'
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

@@ -41,6 +41,9 @@ return [
         'thumbnail' => [
             'class' => 'sadovojav\image\Thumbnail',
         ],
+        'request'   => [
+            'cookieValidationKey'   => 'dsfsydf78sd8fhw8yfdbw8y'
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

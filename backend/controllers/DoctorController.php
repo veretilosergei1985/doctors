@@ -134,6 +134,7 @@ class DoctorController extends Controller
      */
     public function actionUpdate($id)
     {
+        //echo "<pre>"; print_r($_POST); exit;
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
@@ -193,8 +194,9 @@ class DoctorController extends Controller
             $request = Yii::$app->request;
             $doctorId = $request->post('doctorId');
             $model = $this->findModel($doctorId);
-            //$model->image = null;
+            $model->image = null;
             if($model->save(false)) {
+                @unlink(Yii::getAlias('@frontend') . '/web/uploads/doctors/' . $model->primaryKey . '/image.jpg');
                 echo Json::encode([                    
                     'success' => true,
                 ]);

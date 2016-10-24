@@ -16,13 +16,16 @@ doctorBackend.controllers.doctor.update = (function() {
                     };
 
                 $.post('/doctor/delete-image', postData, function (data) {
-                    if (data == true) {
-                        modal.modal('hide');
-                        window.location.reload();
-                        $reportMessage.val('');
+                    var obj = $.parseJSON(data);
+                    if (obj.success == true) {
+                        $('.file-preview ').remove();
                     }
                 });
             });
+
+            $('#doctor-procedures').multiSelect();
+            $('.ms-elem-selectable').removeClass('ms-selected').show();
+            $('.ms-elem-selection').removeClass('ms-selected').hide();
         }
     };
 }());

@@ -21,6 +21,10 @@ return [
                 ],
             ],
         ],
+//        'request' => [
+//            'enableCookieValidation' => false,
+//            'enableCsrfValidation' => false,
+//        ],
     ],
     'params' => $params,
 ];

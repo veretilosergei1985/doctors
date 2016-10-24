@@ -5,8 +5,5 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'request'   => [
-            'cookieValidationKey'   => 'dsfsydf78sd8fhw8yfdbw8y'
-        ],
     ],
 ];

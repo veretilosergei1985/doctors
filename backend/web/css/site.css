@@ -94,3 +94,23 @@ a.desc:after {
     float: right;
     width: 88%;
 }
+
+.card {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    display: block;
+    margin-bottom: 0.75rem;
+    position: relative;
+}
+
+.card-header {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 0;
+    padding: 0.75rem 1.25rem;
+}
+
+.ms-container {
+    width: 640px !important;
+}

@@ -23,9 +23,10 @@ doctorBackend.controllers.doctor.update = (function() {
                 });
             });
 
-            $('#doctor-procedures').multiSelect();
-            $('.ms-elem-selectable').removeClass('ms-selected').show();
-            $('.ms-elem-selection').removeClass('ms-selected').hide();
+            //$('#doctor-procedures').treeMultiselect();
+            //$('#demo1').treeMultiselect();
+            //$('.ms-elem-selectable').removeClass('ms-selected').show();
+            //$('.ms-elem-selection').removeClass('ms-selected').hide();
         }
     };
 }());

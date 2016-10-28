@@ -42,23 +42,18 @@ class DoctorController extends Controller
 
     public function actionIndex()
     {
-        //echo "<pre>"; print_r(Doctor::find()->all()); exit;
-
-//        $items = Doctor::find()->all();
-//        foreach ($items as $item) {
-//            echo "<pre>"; print_r($item->specialities[0]->title); exit;
-//
-//        }
-
         $dataProvider = new ActiveDataProvider([
             'query' => Doctor::find()->orderBy('id DESC'),
             'pagination' => [
-                'pageSize' => 2,
+                'pageSize' => 10,
             ],
             //'sort' => ['attributes' => ['fullName']],
         ]);
-
-        //$this->view->title = 'Doctors List';
         return $this->render('index', ['listDataProvider' => $dataProvider]);
+    }
+
+    public function actionView($id)
+    {
+        return $this->render('view', []);
     }
 }

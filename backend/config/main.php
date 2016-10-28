@@ -9,6 +9,8 @@ $params = array_merge(
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
+    'language' => 'ru-RU',
+    'sourceLanguage' => 'en-US',
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
@@ -44,6 +46,21 @@ return [
         'request'   => [
             'cookieValidationKey'   => 'dsfsydf78sd8fhw8yfdbw8y'
         ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'fileMap' => [
+                        'app/backend' => 'backend.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+            ],
+        ],
+        'thumbnail' => [
+            'class' => 'sadovojav\image\Thumbnail',
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -54,7 +71,8 @@ return [
 //                'site/login' => 'site/login',
                 'doctors' => 'doctor/index',
                 'doctor/info/<id:\d+>' => 'doctor/info',
-                'doctor/delete-image' => 'doctor/delete-image'
+                'doctor/delete-image' => 'doctor/delete-image',
+                //'doctor/create' => 'doctor/create',
             ],
         ],
     ],

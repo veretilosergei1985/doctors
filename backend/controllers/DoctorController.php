@@ -29,7 +29,7 @@ class DoctorController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'info', 'update', 'delete-image'],
+                        'actions' => ['logout', 'index', 'info', 'update', 'delete-image', 'create', 'view'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -117,8 +117,21 @@ class DoctorController extends Controller
     {
         $model = new Doctor();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if($model->validate() && $model->save()) {
+                $model->saveRelations();
+                if ($model->file) {
+                    $path = Yii::getAlias('@frontend') . '/web/uploads/doctors/' . $model->primaryKey;
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777);
+                    }
+                    $model->file->saveAs($path . '/image.jpg');
+                    $model->image = 'image.jpg';
+                    $model->save(false);
+                }
+            }
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -134,7 +147,6 @@ class DoctorController extends Controller
      */
     public function actionUpdate($id)
     {
-        //echo "<pre>"; print_r($_POST); exit;
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
@@ -153,7 +165,6 @@ class DoctorController extends Controller
             }
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
-            //echo "<pre>"; var_dump($model->getErrors()); exit;
             return $this->render('update', [
                 'model' => $model,
             ]);

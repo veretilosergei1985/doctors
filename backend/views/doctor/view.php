@@ -1,19 +1,16 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Doctor */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
+$this->title = Yii::t('app/backend', 'Doctor') . ': ' . $model->getFullName();
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/backend', 'Doctors'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctor-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -27,16 +24,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        'bootstrap' => true,
         'attributes' => [
-            'id',
+            [
+                'attribute' => 'image',
+                'format' => 'raw',
+                'value' => Html::img(Yii::$app->params['frontendBaseUrl'] . '/uploads/doctors/' . $model->primaryKey . '/' . $model->image, ['width' => 150, 'height' => 200])
+            ],
             'first_name',
             'middle_name',
             'last_name',
-            'category_id',
             'title',
-            'description:ntext',
             'experience',
-            'image',
+            [
+                'attribute' => 'description',
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'details',
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'course',
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'association',
+                'format' => 'raw',
+            ],
         ],
     ]) ?>
 

@@ -37,7 +37,7 @@ class Doctor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'middle_name', 'last_name', 'title', 'description'], 'required'],
+            [['first_name', 'middle_name', 'last_name', 'title', 'description', 'experience'], 'required'],
             [['description', 'details', 'education', 'association', 'course'], 'string'],
             [['first_name', 'middle_name', 'last_name', 'title', 'image'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => 'png, jpg'],
@@ -51,17 +51,19 @@ class Doctor extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'first_name' => Yii::t('app', 'First Name'),
-            'middle_name' => Yii::t('app', 'Middle Name'),
-            'last_name' => Yii::t('app', 'Last Name'),
-            'title' => Yii::t('app', 'Title'),
-            'experience' => Yii::t('app', 'Experience'),
-            'image' => Yii::t('app', 'Image'),
-            'description' => Yii::t('app', 'Description'),
-            'details' => Yii::t('app', 'Details'),
-            'education' => Yii::t('app', 'Education'),
-            'association' => Yii::t('app', 'Association'),
-            'course' => Yii::t('app', 'Course'),
+            'first_name' => Yii::t('app/backend', 'First Name'),
+            'middle_name' => Yii::t('app/backend', 'Middle Name'),
+            'last_name' => Yii::t('app/backend', 'Last Name'),
+            'title' => Yii::t('app/backend', 'Title'),
+            'experience' => Yii::t('app/backend', 'Experience'),
+            'image' => Yii::t('app/backend', 'Image'),
+            'description' => Yii::t('app/backend', 'Description'),
+            'details' => Yii::t('app/backend', 'Details'),
+            'education' => Yii::t('app/backend', 'Education'),
+            'association' => Yii::t('app/backend', 'Association'),
+            'course' => Yii::t('app/backend', 'Course'),
+            'image' => Yii::t('app/backend', 'Photo'),
+            'file' => Yii::t('app/backend', 'Photo'),
         ];
     }
 
@@ -69,9 +71,6 @@ class Doctor extends \yii\db\ActiveRecord
         return $this->last_name . ' ' . $this->first_name . ' ' . $this->middle_name;
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getSpecialities()
     {
         return $this->hasMany(Speciality::className(), ['id' => 'speciality_id'])
@@ -94,32 +93,17 @@ class Doctor extends \yii\db\ActiveRecord
         $this->populateRelation('procedures', $procedures);
     }
 
-    /*
-    public function getEducation()
+    public function getDiseases()
     {
-        return $this->hasOne(Education::className(), ['doctor_id' => 'id']);
+        return $this->hasMany(Speciality::className(), ['id' => 'disease_id'])
+            ->viaTable('doctor_disease', ['doctor_id' => 'id']);
     }
 
-    public function setEducation($education)
+    public function setDiseases($diseases)
     {
-        $this->populateRelation('education', $education);
+        $this->populateRelation('diseases', $diseases);
     }
 
-    public function getAssociation()
-    {
-        return $this->hasOne(Association::className(), ['doctor_id' => 'id']);
-    }
-
-    public function setAssociation($education)
-    {
-        $this->populateRelation('association', $education);
-    }
-
-    public function getCourse()
-    {
-        return $this->hasOne(Course::className(), ['doctor_id' => 'id']);
-    }
-    */
     public function saveRelations()
     {
         $this->unlinkAll('specialities', true);
@@ -129,11 +113,21 @@ class Doctor extends \yii\db\ActiveRecord
                 Yii::$app->db->createCommand()->batchInsert('doctor_speciality', ['doctor_id', 'speciality_id'], [[$this->primaryKey, $speciality]])->execute();
             }
         }
-        /*
-        $education = $this->education;
-        $education->load(Yii::$app->request->post());
-        $this->setEducation($education);
-        $education->save();
-        */
+
+        $this->unlinkAll('procedures', true);
+        $procedures = Yii::$app->request->post('Doctor')['procedures'];
+        if (!empty($procedures)) {
+            foreach ($procedures as $procedure) {
+                Yii::$app->db->createCommand()->batchInsert('doctor_procedure', ['doctor_id', 'procedure_id'], [[$this->primaryKey, $procedure]])->execute();
+            }
+        }
+
+        $this->unlinkAll('diseases', true);
+        $diseases = Yii::$app->request->post('Doctor')['diseases'];
+        if (!empty($diseases)) {
+            foreach ($diseases as $disease) {
+                Yii::$app->db->createCommand()->batchInsert('doctor_disease', ['doctor_id', 'disease_id'], [[$this->primaryKey, $disease]])->execute();
+            }
+        }
     }
 }

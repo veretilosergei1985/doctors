@@ -8,10 +8,10 @@ use yii\helpers\Html;
 
 $this->registerJsFile('/js/controllers/doctor/update.js', ['depends' => ['\backend\assets\AppAsset']]);
 
-$this->title = 'Доктор: ' . $model->getFullName();
-$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
+$this->title = Yii::t('app/backend', 'Doctor') . ': ' . $model->getFullName();
+$this->params['breadcrumbs'][] = ['label' =>  Yii::t('app/backend', 'Doctors'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->getFullName(), 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] =  Yii::t('app/backend', 'Update');
 ?>
 <div class="doctor-update">
 

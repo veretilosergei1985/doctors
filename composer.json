@@ -28,7 +28,9 @@
 		"mihaildev/yii2-ckeditor": "*",
 		"kartik-v/yii2-widgets": "*",
 		"kartik-v/yii2-widget-select2": "@dev",
-		"voskobovich/yii2-many-many-behavior": "~3.0"
+		"voskobovich/yii2-many-many-behavior": "~3.0",
+		"kartik-v/yii2-detail-view": "*",
+		"sadovojav/yii2-image-thumbnail": "dev-master"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",

@@ -114,3 +114,18 @@ a.desc:after {
 .ms-container {
     width: 640px !important;
 }
+
+.field-doctor-procedures .select2-selection__clear {
+    float: none !important;
+    position: inherit !important;
+}
+
+.field-doctor-procedures .select2-selection__choice {
+    float: none !important;
+    padding: 10px 5px !important;
+    margin-right: 6px !important;
+}
+
+.admin-add-new-item {
+    margin: 10px 0;
+}

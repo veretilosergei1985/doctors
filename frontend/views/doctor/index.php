@@ -39,8 +39,8 @@ use yii\widgets\ListView;
 <!--                            <div class="cbp-l-grid-team-position">Psychiatrist</div>-->
 <!--                        </li>-->
 
-                        <?php echo
-                        ListView::widget([
+                        <?php
+                        echo ListView::widget([
                             'dataProvider' => $listDataProvider,
                             'itemView' => '_list',
                             'summary' => '',

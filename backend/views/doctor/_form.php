@@ -25,12 +25,15 @@ use kartik\widgets\FileInput;
 
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'experience')->widget(\kartik\widgets\TouchSpin::classname(), []);
+            ?>
+
             <div id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="card">
                     <div class="card-header" role="tab" id="headingOne">
                         <h5 class="mb-0">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Description
+                                <?= Yii::t('app/backend', 'Description') ?>
                             </a>
                         </h5>
                     </div>
@@ -47,7 +50,7 @@ use kartik\widgets\FileInput;
                     <div class="card-header" role="tab" id="headingTwo">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Details
+                                <?= Yii::t('app/backend', 'Details') ?>
                             </a>
                         </h5>
                     </div>
@@ -63,7 +66,7 @@ use kartik\widgets\FileInput;
                     <div class="card-header" role="tab" id="headingThree">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Education
+                                <?= Yii::t('app/backend', 'Education') ?>
                             </a>
                         </h5>
                     </div>
@@ -80,7 +83,7 @@ use kartik\widgets\FileInput;
                     <div class="card-header" role="tab" id="headingThree">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                Association
+                                <?= Yii::t('app/backend', 'Association') ?>
                             </a>
                         </h5>
                     </div>
@@ -108,7 +111,7 @@ use kartik\widgets\FileInput;
                 'pluginOptions' => [
                 'allowClear' => true
             ],
-            ]); ?>
+            ])->label(Yii::t('app/backend', 'Specialities')); ?>
 
             <?php $options = [
                     'options' => ['accept' => 'image/*'],
@@ -130,10 +133,37 @@ use kartik\widgets\FileInput;
                 }
             ?>
             
-            <?= $form->field($model, 'file')->widget(FileInput::classname(), $options);
-            ?>
+            <?= $form->field($model, 'file')->widget(FileInput::classname(), $options); ?>
 
-<!--            <?= $form->field($model, 'procedures')->dropDownList(ArrayHelper::map(\common\models\Procedure::find()->all(),'id','title')); ?> -->
+            <!--
+            <select id="doctor-procedures" name="Doctor[procedures][]" multiple="multiple">
+            <?php foreach (\common\models\Procedure::find()->all() as $item) { ?>
+                <option value="<?= $item->primaryKey; ?>" data-section="top" data-index="<?= $item->primaryKey; ?>"><?= $item->title; ?></option>
+            <?php } ?>
+            </select>
+            -->
+
+            <?= $form->field($model, 'procedures')->widget(\kartik\widgets\Select2::classname(), [
+                'data' => ArrayHelper::map(\common\models\Procedure::find()->all(),'id','title'),
+                'options' => [
+                    'placeholder' => 'Select procedure ...',
+                    'multiple' => true
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])->label(Yii::t('app/backend', 'Procedures')); ?>
+
+            <?= $form->field($model, 'diseases')->widget(\kartik\widgets\Select2::classname(), [
+                'data' => ArrayHelper::map(\common\models\Disease::find()->all(),'id','title'),
+                'options' => [
+                    'placeholder' => 'Select disease ...',
+                    'multiple' => true
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])->label(Yii::t('app/backend', 'Diseases')); ?>
 
         </div>
     </div>

@@ -1,8 +1,11 @@
 <?php
 use kartik\grid\GridView;
 
-$this->title = 'My Yii Application';
+$this->title = Yii::t('app/backend', 'Doctors list');
 ?>
+<div class="admin-add-new-item">
+    <?= \yii\helpers\Html::a(Yii::t('app/backend', 'Add new doctor'), ['/doctor/create'], ['class'=>'btn btn-success btn-lg']) ?>
+</div>
 <div class="panel panel-primary">
     <?php
     echo GridView::widget([
@@ -40,7 +43,7 @@ $this->title = 'My Yii Application';
             ],
             [
                 'attribute' => 'specialities',
-                //'label' => yii::t('app', 'Specialities'),
+                'label' => yii::t('app/backend', 'Specialities'),
                 'value' => function ($data) {
                     return \common\helpers\GridHtmlHelper::displayRowAsList($data->specialities, 'title');//implode(', ', \yii\helpers\ArrayHelper::map($data->specialities, 'title', 'title'));
                 },

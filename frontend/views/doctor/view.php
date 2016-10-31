@@ -1,3 +1,9 @@
+<?php
+$this->registerJsFile('/js/plugins/pwstabs/jquery.pwstabs.js', ['depends' => ['\frontend\assets\AppAsset']]);;
+$this->registerCssFile('/js/plugins/pwstabs/jquery.pwstabs.css');
+$this->registerCssFile('/js/plugins/pwstabs/font-awesome/css/font-awesome.min.css');
+?>
+        
 <section id="doctor" class="home-section bg-gray paddingbot-60">
     <div class="container marginbot-50">
         <div class="row">
@@ -15,7 +21,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1>View doctor details</h1>
+                <div class="hello_world">
+                    <div data-pws-tab="anynameyouwant1" data-pws-tab-name="Tab Title 1">Our first tab</div>
+                    <div data-pws-tab="anynameyouwant2" data-pws-tab-name="Tab Title 2">Our second tab</div>
+                    <div data-pws-tab="anynameyouwant3" data-pws-tab-name="Tab Title 3">Our third tab</div>
+                 </div>
             </div>
         </div>
     </div>

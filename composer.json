@@ -30,7 +30,8 @@
 		"kartik-v/yii2-widget-select2": "@dev",
 		"voskobovich/yii2-many-many-behavior": "~3.0",
 		"kartik-v/yii2-detail-view": "*",
-		"sadovojav/yii2-image-thumbnail": "dev-master"
+		"sadovojav/yii2-image-thumbnail": "dev-master",
+                "bower-asset/pwstabs": "*"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",

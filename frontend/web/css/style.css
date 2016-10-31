@@ -261,7 +261,8 @@ Navigation
 
 .navbar-brand {
   padding-top: 15px;
-  margin-top: 5px;
+  //margin-top: 5px;
+  margin-top: -11px;
   padding-bottom: 0;
 }
 
@@ -701,7 +702,8 @@ hr.bold {
 }
 
 .bg-gray {
-	background: #e1e1dd;
+	//background: #e1e1dd;
+        background: #e8eef0;
 }
 
 
@@ -2080,6 +2082,8 @@ a.btn:focus{
 	margin-bottom: 20px;
 	padding: 18px 0 21px;
 	color: 	#5e6e71;
+        
+        box-shadow: rgba(0, 0, 0, 0.498039) 0px 0px 5px 0px;
 }
 
 .doctors-list {
@@ -2087,7 +2091,9 @@ a.btn:focus{
 }
 
 .doctor-item:hover {
-	border: 1px solid #3FBBC0;
+	//border: 1px solid #3FBBC0;
+        box-shadow: #3FBBC0 0px 0px 5px 0px;
+
 }
 
 .doctor_item_right-side h3 {

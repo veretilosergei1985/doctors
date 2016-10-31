@@ -80,7 +80,7 @@ AppAsset::register($this);
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <img src="img/logo.png" alt="" width="150" height="40" />
+                    <img src="img/logo_new.png" alt="" width="60" height="60" />
                 </a>
             </div>
 

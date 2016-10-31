@@ -36,9 +36,9 @@ AppAsset::register($this);
     <link href="/css/style.css" rel="stylesheet">
 
     <!-- boxed bg -->
-    <link id="bodybg" href="bodybg/bg1.css" rel="stylesheet" type="text/css" />
+    <link id="bodybg" href="/bodybg/bg1.css" rel="stylesheet" type="text/css" />
     <!-- template skin -->
-    <link id="t-colors" href="color/default.css" rel="stylesheet">
+    <link id="t-colors" href="/color/default.css" rel="stylesheet">
 
 <!--    <script src="js/jquery.min.js"></script>-->
 <!--    <script src="js/bootstrap.min.js"></script>-->
@@ -80,7 +80,7 @@ AppAsset::register($this);
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <img src="img/logo.png" alt="" width="150" height="40" />
+                    <img src="/img/_new.png" alt="" width="60" height="60" />
                 </a>
             </div>
 
@@ -366,12 +366,12 @@ AppAsset::register($this);
                 <div class="col-sm-12 col-md-12 col-lg-12" >
                     <div class="wow bounceInUp" data-wow-delay="0.2s">
                         <div id="owl-works" class="owl-carousel">
-                            <div class="item"><a href="img/photo/1.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="img/photo/1.jpg" class="img-responsive" alt="img"></a></div>
-                            <div class="item"><a href="img/photo/2.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/2@2x.jpg"><img src="img/photo/2.jpg" class="img-responsive " alt="img"></a></div>
-                            <div class="item"><a href="img/photo/3.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/3@2x.jpg"><img src="img/photo/3.jpg" class="img-responsive " alt="img"></a></div>
-                            <div class="item"><a href="img/photo/4.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/4@2x.jpg"><img src="img/photo/4.jpg" class="img-responsive " alt="img"></a></div>
-                            <div class="item"><a href="img/photo/5.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/5@2x.jpg"><img src="img/photo/5.jpg" class="img-responsive " alt="img"></a></div>
-                            <div class="item"><a href="img/photo/6.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/6@2x.jpg"><img src="img/photo/6.jpg" class="img-responsive " alt="img"></a></div>
+                            <div class="item"><a href="/img/photo/1.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="/img/photo/1.jpg" class="img-responsive" alt="img"></a></div>
+                            <div class="item"><a href="/img/photo/2.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/2@2x.jpg"><img src="/img/photo/2.jpg" class="img-responsive " alt="img"></a></div>
+                            <div class="item"><a href="/img/photo/3.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/3@2x.jpg"><img src="/img/photo/3.jpg" class="img-responsive " alt="img"></a></div>
+                            <div class="item"><a href="/img/photo/4.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/4@2x.jpg"><img src="/img/photo/4.jpg" class="img-responsive " alt="img"></a></div>
+                            <div class="item"><a href="/img/photo/5.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/5@2x.jpg"><img src="/img/photo/5.jpg" class="img-responsive " alt="img"></a></div>
+                            <div class="item"><a href="/img/photo/6.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/6@2x.jpg"><img src="/img/photo/6.jpg" class="img-responsive " alt="img"></a></div>
                         </div>
                     </div>
                 </div>
@@ -399,7 +399,7 @@ AppAsset::register($this);
                                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                     </div>
                                     <div class="person-text rel text-light">
-                                        <img src="img/testimonials/1.jpg" alt="" class="person img-circle" />
+                                        <img src="/img/testimonials/1.jpg" alt="" class="person img-circle" />
                                         <a title="" href="#">Anna</a>
                                         <span>Chicago, Illinois</span>
                                     </div>
@@ -412,7 +412,7 @@ AppAsset::register($this);
                                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                     </div>
                                     <div class="person-text rel text-light">
-                                        <img src="img/testimonials/2.jpg" alt="" class="person img-circle" />
+                                        <img src="/img/testimonials/2.jpg" alt="" class="person img-circle" />
                                         <a title="" href="#">Matthew G</a>
                                         <span>San Antonio, Texas</span>
                                     </div>
@@ -425,7 +425,7 @@ AppAsset::register($this);
                                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                     </div>
                                     <div class="person-text rel text-light">
-                                        <img src="img/testimonials/3.jpg" alt="" class="person img-circle" />
+                                        <img src="/img/testimonials/3.jpg" alt="" class="person img-circle" />
                                         <a title="" href="#">Scarlet Smith</a>
                                         <span>Dallas, Texas</span>
                                     </div>
@@ -440,7 +440,7 @@ AppAsset::register($this);
                                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                     </div>
                                     <div class="person-text rel text-light">
-                                        <img src="img/testimonials/4.jpg" alt="" class="person img-circle" />
+                                        <img src="/img/testimonials/4.jpg" alt="" class="person img-circle" />
                                         <a title="" href="#">Lucas Thompson</a>
                                         <span>Austin, Texas</span>
                                     </div>
@@ -453,7 +453,7 @@ AppAsset::register($this);
                                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                     </div>
                                     <div class="person-text rel text-light">
-                                        <img src="img/testimonials/5.jpg" alt="" class="person img-circle" />
+                                        <img src="/img/testimonials/5.jpg" alt="" class="person img-circle" />
                                         <a title="" href="#">Ella Mentree</a>
                                         <span>Fort Worth, Texas</span>
                                     </div>
@@ -466,7 +466,7 @@ AppAsset::register($this);
                                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                     </div>
                                     <div class="person-text rel text-light">
-                                        <img src="img/testimonials/6.jpg" alt="" class="person img-circle" />
+                                        <img src="/img/testimonials/6.jpg" alt="" class="person img-circle" />
                                         <a title="" href="#">Suzanne Adam</a>
                                         <span>Detroit, Michigan</span>
                                     </div>
@@ -593,22 +593,22 @@ AppAsset::register($this);
             <div class="row">
                 <div class="col-sm-6 col-md-3">
                     <div class="partner">
-                        <a href="#"><img src="img/dummy/partner-1.jpg" alt="" /></a>
+                        <a href="#"><img src="/img/dummy/partner-1.jpg" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <div class="partner">
-                        <a href="#"><img src="img/dummy/partner-2.jpg" alt="" /></a>
+                        <a href="#"><img src="/img/dummy/partner-2.jpg" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <div class="partner">
-                        <a href="#"><img src="img/dummy/partner-3.jpg" alt="" /></a>
+                        <a href="#"><img src="/img/dummy/partner-3.jpg" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <div class="partner">
-                        <a href="#"><img src="img/dummy/partner-4.jpg" alt="" /></a>
+                        <a href="#"><img src="/img/dummy/partner-4.jpg" alt="" /></a>
                     </div>
                 </div>
             </div>

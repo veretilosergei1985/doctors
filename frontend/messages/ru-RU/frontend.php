@@ -1,6 +1,11 @@
 <?php
 
 return [
-     'name' => 'Имя',
-     'original message 2' => 'translated message 2',
+    'name' => 'Имя',
+    'About doctor' => 'О враче',
+    'Educaton' => 'Образование',
+    'Reviews' => 'Отзывы',
+    'Participation in associations' => 'Участие в ассоциациях',
+    'Procedures' => 'Процедуры',
+    'Diseases' => 'Заболевания',
 ];

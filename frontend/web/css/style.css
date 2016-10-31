@@ -19,7 +19,8 @@ body {
     color: #666;
     background-color: #ddd;
 	font-size: 16px;
-    line-height: 1.6em;
+    line-height: 1.9em !important;
+
 }
 
 html {
@@ -2077,13 +2078,12 @@ a.btn:focus{
 .doctor-item {
 	display: block;
 	background: #fff none repeat scroll 0 0;
-	border: 1px solid #fff;
+	//border: 1px solid #fff;
 	border-radius: 3px;
 	margin-bottom: 20px;
 	padding: 18px 0 21px;
 	color: 	#5e6e71;
-        
-        box-shadow: rgba(0, 0, 0, 0.498039) 0px 0px 5px 0px;
+    box-shadow: rgba(0, 0, 0, 0.498039) 0px 0px 5px 0px;
 }
 
 .doctors-list {
@@ -2129,4 +2129,42 @@ a.btn:focus{
 .experience {
 	color: #3FBBC0;
 	padding: 5px 0;
+}
+
+.pws_tabs_controll {
+	background: #70C5C2;
+}
+
+.pws_tabs_container ul.pws_tabs_controll li a {
+	background: #70C5C2 !important;
+}
+
+.pws_tabs_container ul.pws_tabs_controll li a:hover {
+	background-color: #9bd7d5 !important;
+}
+
+.pws_tabs_container ul.pws_tabs_controll li a.pws_tab_active {
+	background-color: #9bd7d5  !important;
+	color: #505050  !important;
+}
+
+.pws_tabs_container, .pws_tabs_controll a {
+	font-size: 14px !important;
+}
+
+.doctor-view .link-wrap {
+	margin-bottom: 10px;
+}
+.doctor-view-map {
+	height: 250px;
+	width: 100%;
+	float: none;
+	display: inline-block;
+	position: relative;
+	margin-bottom: 10px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
 }

@@ -95,7 +95,7 @@ class Doctor extends \yii\db\ActiveRecord
 
     public function getDiseases()
     {
-        return $this->hasMany(Speciality::className(), ['id' => 'disease_id'])
+        return $this->hasMany(Disease::className(), ['id' => 'disease_id'])
             ->viaTable('doctor_disease', ['doctor_id' => 'id']);
     }
 

@@ -54,6 +54,24 @@ class DoctorController extends Controller
 
     public function actionView($id)
     {
-        return $this->render('view', []);
+        $model = $this->findModel($id);
+
+        return $this->render('view', ['model' => $model]);
+    }
+
+    /**
+     * Finds the Doctor model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Doctor the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Doctor::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

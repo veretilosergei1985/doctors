@@ -21,7 +21,8 @@ class AppAsset extends AssetBundle
         '/css/site.css',
     ];
     public $js = [
-        '/js/doctor-frontend.js'
+        '/js/doctor-frontend.js',
+        '/js/doctor-frontend.google.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

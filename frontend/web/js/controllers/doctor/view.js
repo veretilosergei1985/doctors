@@ -6,7 +6,9 @@ doctorFrontend.controllers.doctor.view = (function() {
     return {
         isActive: true,
         init: function () {
-            this.initHandlers();            
+            this.initHandlers();
+
+            doctorFrontend.google.init();
         },
 
         initHandlers: function () {

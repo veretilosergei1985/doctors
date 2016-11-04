@@ -22,11 +22,13 @@ class AppAsset extends AssetBundle
         'js/plugins/tree-multiselect/jquery.tree-multiselect.scss'
     ];
     public $js = [
+        //'https://maps.googleapis.com/maps/api/js?key=AIzaSyDM_yPrIq30kCIxSUiv--sU-mmAuXVLU1s&libraries=places',
         'js/doctor-backend.js',
         'js/plugins/tree-multiselect/jquery.tree-multiselect.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
+        //'yii\jui\JuiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
 }

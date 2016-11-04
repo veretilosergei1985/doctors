@@ -2,6 +2,8 @@
 $this->registerJsFile('/js/plugins/pwstabs/jquery.pwstabs.js', ['depends' => ['\frontend\assets\AppAsset']]);;
 $this->registerCssFile('/js/plugins/pwstabs/jquery.pwstabs.css');
 $this->registerCssFile('/js/plugins/pwstabs/font-awesome/css/font-awesome.min.css');
+
+$this->registerJsFile('/js/controllers/doctor/view.js', ['depends' => ['\frontend\assets\AppAsset']]);;
 ?>
         
 <section id="doctor" class="home-section bg-gray paddingbot-60">
@@ -39,88 +41,67 @@ $this->registerCssFile('/js/plugins/pwstabs/font-awesome/css/font-awesome.min.cs
                         </div>
 
                         <div class="doctor-view-map">
-                            <div id="map"></div>
+                            <div id="map" class="map"><!-- Google map area --></div>
                         </div>
-
-                        <style>
-                            #map {
-                                height: 400px;
-                                width: 100%;
-                            }
-                        </style>
-
-
-                        <script>
-                            function initMap() {
-                                var uluru = {lat: -25.363, lng: 131.044};
-                                var map = new google.maps.Map(document.getElementById('map'), {
-                                    zoom: 4,
-                                    center: uluru
-                                });
-                                var marker = new google.maps.Marker({
-                                    position: uluru,
-                                    map: map
-                                });
-                            }
-                        </script>
-
-                        <script>
-                            function initMap() {
-                                var uluru = {lat: -25.363, lng: 131.044};
-                                var map = new google.maps.Map(document.getElementById('map'), {
-                                    zoom: 4,
-                                    center: uluru
-                                });
-                                var marker = new google.maps.Marker({
-                                    position: uluru,
-                                    map: map
-                                });
-                            }
-                        </script>
-
-                        <script src="https://maps.googleapis.com/maps/api/js?key= AIzaSyDM_yPrIq30kCIxSUiv--sU-mmAuXVLU1s&callback=initMap" async defer></script>
-
 
                         <div class="hello_world">
                             <div data-pws-tab="tab1" data-pws-tab-name="<?= Yii::t('app/frontend', 'About doctor') ?>">
 
-                                <div>
-                                    <p></p>
-                                    <?= $model->details; ?>
-                                    <hr class="dotted">
-                                </div>
+                                <?php if(!empty($model->details)) { ?>
+                                    <div>
+                                        <p></p>
+                                        <?= $model->details; ?>
+                                        <hr class="dotted">
+                                    </div>
+                                <?php } ?>
 
-                                <div>
-                                    <p><strong><?= Yii::t('app/frontend', 'Educaton') ?></strong></p>
-                                    <?= $model->education; ?>
-                                    <hr class="dotted">
-                                </div>
+                                <?php if(!empty($model->education)) { ?>
+                                    <div>
+                                        <p><strong><?= Yii::t('app/frontend', 'Educaton') ?></strong></p>
+                                        <?= $model->education; ?>
+                                        <hr class="dotted">
+                                    </div>
+                                <?php } ?>
 
-                                <div>
-                                    <p><strong><?= Yii::t('app/frontend', 'Participation in associations'); ?></strong></p>
-                                    <?= $model->education; ?>
-                                    <hr class="dotted">
-                                </div>
+                                <?php if(!empty($model->course)) { ?>
+                                    <div>
+                                        <p><strong><?= Yii::t('app/frontend', 'Courses') ?></strong></p>
+                                        <?= $model->course; ?>
+                                        <hr class="dotted">
+                                    </div>
+                                <?php } ?>
 
-                                <div>
-                                    <p><strong><?= Yii::t('app/frontend', 'Procedures'); ?></strong></p>
+                                <?php if(!empty($model->association)) { ?>
+                                    <div>
+                                        <p><strong><?= Yii::t('app/frontend', 'Participation in associations'); ?></strong></p>
+                                        <?= $model->association; ?>
+                                        <hr class="dotted">
+                                    </div>
+                                <?php } ?>
+
+                                <?php if(!empty($model->procedures)) { ?>
+                                    <div>
+                                        <p><strong><?= Yii::t('app/frontend', 'Procedures'); ?></strong></p>
+                                            <ul>
+                                            <?php foreach($model->procedures as $procedure) { ?>
+                                                <li><?= $procedure->title; ?></li>
+                                            <?php } ?>
+                                         </ul>
+                                        <hr class="dotted">
+                                    </div>
+                                <?php } ?>
+
+                                <?php if(!empty($model->diseases)) { ?>
+                                    <div>
+                                        <p><strong><?= Yii::t('app/frontend', 'Diseases'); ?></strong></p>
                                         <ul>
-                                        <?php foreach($model->procedures as $procedure) { ?>
-                                            <li><?= $procedure->title; ?></li>
-                                        <?php } ?>
-                                     </ul>
-                                    <hr class="dotted">
-                                </div>
-
-                                <div>
-                                    <p><strong><?= Yii::t('app/frontend', 'Diseases'); ?></strong></p>
-                                    <ul>
-                                        <?php foreach($model->diseases as $disease) { ?>
-                                            <li><?= $disease->title; ?></li>
-                                        <?php } ?>
-                                    </ul>
-                                    <hr class="dotted">
-                                </div>
+                                            <?php foreach($model->diseases as $disease) { ?>
+                                                <li><?= $disease->title; ?></li>
+                                            <?php } ?>
+                                        </ul>
+                                        <hr class="dotted">
+                                    </div>
+                                <?php } ?>
 
                             </div>
                             <div data-pws-tab="tab2" data-pws-tab-name="<?= Yii::t('app/frontend', 'Reviews'); ?>">Our second tab</div>

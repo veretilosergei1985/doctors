@@ -20,10 +20,55 @@ class m161024_120957_create_table_doctor extends Migration
             'association' => $this->text(),
             'course' => $this->text(),
         ]);
+
+        $this->createIndex(
+            'idx-doctor-first_name',
+            'doctor',
+            'first_name'
+        );
+
+        $this->createIndex(
+            'idx-doctor-last_name',
+            'doctor',
+            'last_name'
+        );
+
+        $this->createIndex(
+            'idx-doctor-middle_name',
+            'doctor',
+            'middle_name'
+        );
+
+        $this->createIndex(
+            'idx-doctor-title',
+            'doctor',
+            'title'
+        );
+
     }
 
     public function down()
     {
+        $this->dropIndex(
+            'idx-doctor-first_name',
+            'doctor'
+        );
+
+        $this->dropIndex(
+            'idx-doctor-last_name',
+            'doctor'
+        );
+
+        $this->dropIndex(
+            'idx-doctor-middle_name',
+            'doctor'
+        );
+
+        $this->dropIndex(
+            'idx-doctor-title',
+            'doctor'
+        );
+
         $this->dropTable('doctor');
     }
 }

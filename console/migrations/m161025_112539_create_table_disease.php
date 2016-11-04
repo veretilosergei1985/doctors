@@ -12,11 +12,18 @@ class m161025_112539_create_table_disease extends Migration
             'description' => $this->text(),
         ]);
 
+        $this->createIndex(
+            'idx-disease-title',
+            'disease',
+            'title'
+        );
+
         $this->createTable('doctor_disease', [
-            'id' => $this->primaryKey(),
             'doctor_id' => $this->integer(),
             'disease_id' => $this->integer(),
         ]);
+
+        $this->addPrimaryKey('doctor_disease_pk', 'doctor_disease', ['doctor_id', 'disease_id']);
 
         $this->execute("
             INSERT INTO `disease` (`title`) VALUES ('Аббревиатоз');
@@ -1945,6 +1952,18 @@ class m161025_112539_create_table_disease extends Migration
 
     public function down()
     {
+        $this->dropIndex(
+            'idx-disease-title',
+            'disease'
+        );
+
         $this->dropTable('disease');
+
+        $this->dropIndex(
+            'doctor_disease_pk',
+            'doctor_disease'
+        );
+
+        $this->dropTable('doctor_disease');
     }
 }

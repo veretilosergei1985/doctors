@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bb2a0406232a2398e5f4e1baaa7fb996",
-    "content-hash": "f319d32709be5679b717aee94f7503a8",
+    "hash": "b6794421ad2aebed2742cb4e41b9c86d",
+    "content-hash": "7b967878665182f772a3896433f37fec",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -260,6 +260,31 @@
             ]
         },
         {
+            "name": "bower-asset/jquery-ui",
+            "version": "1.11.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jqueryui.git",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "jquery-ui.js"
+                ],
+                "bower-asset-ignore": []
+            }
+        },
+        {
             "name": "bower-asset/jquery.inputmask",
             "version": "3.2.7",
             "source": {
@@ -332,6 +357,38 @@
                     "package.json"
                 ]
             }
+        },
+        {
+            "name": "bower-asset/pwstabs",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexchizhovcom/pwstabs.git",
+                "reference": "72808cd402bf72b28963483cdea8b2855dd11cd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexchizhovcom/pwstabs/zipball/72808cd402bf72b28963483cdea8b2855dd11cd4",
+                "reference": "72808cd402bf72b28963483cdea8b2855dd11cd4",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "assets/jquery.pwstabs.js",
+                "branch-alias": {
+                    "dev-master": "1.3.0-dev"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "PWS Tabs jQuery Plugin",
+            "keywords": [
+                "jquery",
+                "plugin",
+                "responsive",
+                "tabs"
+            ]
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -2876,6 +2933,56 @@
                 "yii2"
             ],
             "time": "2016-09-20 20:58:01"
+        },
+        {
+            "name": "yiisoft/yii2-jui",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-jui.git",
+                "reference": "f4072b3cc8d0b624355294a99f792be7d98dd7cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/f4072b3cc8d0b624355294a99f792be7d98dd7cf",
+                "reference": "f4072b3cc8d0b624355294a99f792be7d98dd7cf",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-ui": "1.11.*@stable",
+                "yiisoft/yii2": "~2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                },
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\jui\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com"
+                }
+            ],
+            "description": "The Jquery UI extension for the Yii framework",
+            "keywords": [
+                "jQuery UI",
+                "yii2"
+            ],
+            "time": "2016-10-11 11:19:51"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",

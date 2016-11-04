@@ -83,11 +83,28 @@ use kartik\widgets\FileInput;
                     <div class="card-header" role="tab" id="headingThree">
                         <h5 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                <?= Yii::t('app/backend', 'Association') ?>
+                                <?= Yii::t('app/backend', 'Courses') ?>
                             </a>
                         </h5>
                     </div>
                     <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+                        <div class="card-block">
+                            <?= $form->field($model, 'course')->widget(CKEditor::className(),[
+                                'editorOptions' => ['preset' => 'standard'],
+                                'options' => ['rows' => 3],
+                            ])->label(false); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingThree">
+                        <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                <?= Yii::t('app/backend', 'Association') ?>
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
                         <div class="card-block">
                             <?= $form->field($model, 'association')->widget(CKEditor::className(),[
                                 'editorOptions' => ['preset' => 'standard'],

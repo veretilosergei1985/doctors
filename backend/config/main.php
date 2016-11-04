@@ -72,7 +72,7 @@ return [
                 'doctors' => 'doctor/index',
                 'doctor/info/<id:\d+>' => 'doctor/info',
                 'doctor/delete-image' => 'doctor/delete-image',
-                //'doctor/create' => 'doctor/create',
+                'hospitals' => 'hospital/index',
             ],
         ],
     ],

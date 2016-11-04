@@ -10,6 +10,7 @@ use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\helpers\Json;
 

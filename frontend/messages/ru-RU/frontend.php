@@ -8,4 +8,5 @@ return [
     'Participation in associations' => 'Участие в ассоциациях',
     'Procedures' => 'Процедуры',
     'Diseases' => 'Заболевания',
+    'Courses' => 'Курсы',
 ];

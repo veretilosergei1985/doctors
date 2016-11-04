@@ -12,11 +12,18 @@ class m161019_091026_populate_speciality_table extends Migration
             'description' => $this->text(),
         ]);
 
+        $this->createIndex(
+            'idx-speciality-title',
+            'speciality',
+            'title'
+        );
+
         $this->createTable('doctor_speciality', [
-            'id' => $this->primaryKey(),
             'doctor_id' => $this->integer(),
             'speciality_id' => $this->integer(),
         ]);
+
+        $this->addPrimaryKey('doctor_speciality_pk', 'doctor_speciality', ['doctor_id', 'speciality_id']);
 
         $this->execute("
                         INSERT INTO `speciality` (`title`, `description`) VALUES ('aкушер','aкушер');
@@ -139,7 +146,19 @@ class m161019_091026_populate_speciality_table extends Migration
 
     public function down()
     {
+        $this->dropIndex(
+            'idx-speciality-title',
+            'speciality'
+        );
+
         $this->dropTable('speciality');
+
+        $this->dropIndex(
+            'doctor_speciality_pk',
+            'doctor_speciality'
+        );
+
+        $this->dropTable('doctor_speciality');
     }
 
 }

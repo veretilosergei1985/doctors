@@ -2132,11 +2132,11 @@ a.btn:focus{
 }
 
 .pws_tabs_controll {
-	background: #70C5C2;
+	background: #27BCBB;
 }
 
 .pws_tabs_container ul.pws_tabs_controll li a {
-	background: #70C5C2 !important;
+	background: #27BCBB !important;
 }
 
 .pws_tabs_container ul.pws_tabs_controll li a:hover {
@@ -2144,8 +2144,9 @@ a.btn:focus{
 }
 
 .pws_tabs_container ul.pws_tabs_controll li a.pws_tab_active {
-	background-color: #9bd7d5  !important;
-	color: #505050  !important;
+	background-color: #E8EEF0  !important;
+	color: #27bcbb  !important;
+	font-weight: 600;
 }
 
 .pws_tabs_container, .pws_tabs_controll a {
@@ -2167,4 +2168,13 @@ a.btn:focus{
 	-ms-border-radius: 2px;
 	-o-border-radius: 2px;
 	border-radius: 2px;
+}
+
+.map {
+	height: 400px;
+	width: 100%;
+}
+
+.doctor-view-map {
+	padding: 20px;
 }

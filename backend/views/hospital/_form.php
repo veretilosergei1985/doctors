@@ -56,10 +56,7 @@ use kartik\widgets\FileInput;
             <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::className(), [
                 'mask' => '999-999-9999',
             ]) ?>
-
-        </div>
-
-        <div class="col-md-5 col-sm-5 col-xs-5">
+            
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
             <?= Html::input('text', 'hospital-address_tmp', null, ['id' => 'hospital-address_tmp']) ?>
@@ -72,6 +69,45 @@ use kartik\widgets\FileInput;
             <div class="col-md-5 col-sm-5 col-xs-5">
                 <?= $form->field($model, 'longitude')->textInput(['maxlength' => true]) ?>
             </div>
+
+        </div>
+
+        <div class="col-md-5 col-sm-5 col-xs-5">
+            
+            <?php $options = [
+                    'options' => ['accept' => 'image/*'],
+                    'pluginOptions' => [
+                        'showRemove' => false,
+                        'showUpload' => false,
+                        'initialPreviewAsData' => true,
+                        'initialCaption' => "",
+                        'removeIcon' => '<i id="remove-hospital-logo" class="glyphicon glyphicon-trash"></i> ',
+                        'initialPreviewConfig' => [
+                            ['caption' => 'image.jpg']
+                        ],
+                        'overwriteInitial'=>false,
+                    ]
+                ];
+            
+                if (!empty($model->logo)) {
+                    $options['pluginOptions']['initialPreview'] = [Yii::$app->params['frontendBaseUrl'] . '/uploads/hospitals/' . $model->primaryKey . '/logo.jpg'];
+                }
+            ?>
+            
+            <?= $form->field($model, 'file')->widget(FileInput::classname(), $options); ?>
+            
+            <?php $options = [
+                    'options'=>[
+                        'multiple'=>true
+                    ],
+                    'pluginOptions' => [
+                        'uploadUrl' => \yii\helpers\Url::to(['/hosrital/create']),
+                        'maxFileCount' => 10
+                    ]
+                ];
+            ?>
+          
+            <?= $form->field($model, 'galleryFiles[]')->widget(FileInput::classname(), $options); ?>
 
         </div>
     </div>

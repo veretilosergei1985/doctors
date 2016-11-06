@@ -16,22 +16,23 @@ doctorBackend.controllers.hospital.create = (function ($) {
         hospitalLongitude: $("#hospital-longitude"),
     };
 
-    var locaionModal = $('#locaion-dialog');
+    var googleMapScriptSrc = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDM_yPrIq30kCIxSUiv--sU-mmAuXVLU1s&libraries=places&callback=initialize&language=ru";
 
     return {
         isActive: true,
 
         init: function () {
 
-            var googleMapScriptSrc = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDM_yPrIq30kCIxSUiv--sU-mmAuXVLU1s&libraries=places&callback=initialize&language=ru";
-
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = googleMapScriptSrc;
-            document.body.appendChild(script);
-
+            loadScript();
             window.initialize = initMap;
 
+            $("#w1").change(function() {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    $('.kv-file-zoom').remove();
+                };
+                $('.kv-file-zoom').remove();
+            });
 
             function initMap() {
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -62,7 +63,6 @@ doctorBackend.controllers.hospital.create = (function ($) {
                         window.alert("Autocomplete's returned place contains no geometry");
                         return;
                     }
-
                     // If the place has a geometry, then present it on a map.
                     if (place.geometry.viewport) {
                         map.fitBounds(place.geometry.viewport);
@@ -101,10 +101,17 @@ doctorBackend.controllers.hospital.create = (function ($) {
         initHandlers: function () {
         }
     };
+    
+    function loadScript() {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = googleMapScriptSrc;
+        document.body.appendChild(script);
+    }
 
     function setLatLng(place) {
-        console.log(place.geometry.location.lat());
         fields.hospitalLatitude.val(place.geometry.location.lat());
+        fields.hospitalLongitude.val(place.geometry.location.lng());
     }
 
 })

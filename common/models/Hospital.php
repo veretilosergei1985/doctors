@@ -19,7 +19,10 @@ use Yii;
  * @property string $logo
  */
 class Hospital extends \yii\db\ActiveRecord
-{
+{    
+    public $file;    
+    public $galleryFiles;
+
     /**
      * @inheritdoc
      */
@@ -39,6 +42,8 @@ class Hospital extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['latitude', 'longitude'], 'number'],
             [['title', 'address', 'email', 'phone', 'logo'], 'string', 'max' => 255],
+            [['file'], 'file', 'extensions' => 'png, jpg'],
+            [['galleryFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
         ];
     }
 
@@ -48,16 +53,49 @@ class Hospital extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'parent_id' => Yii::t('app', 'Parent ID'),
-            'title' => Yii::t('app', 'Title'),
-            'description' => Yii::t('app', 'Description'),
-            'address' => Yii::t('app', 'Address'),
-            'email' => Yii::t('app', 'Email'),
-            'phone' => Yii::t('app', 'Phone'),
-            'latitude' => Yii::t('app', 'Latitude'),
-            'longitude' => Yii::t('app', 'Longitude'),
-            'logo' => Yii::t('app', 'Logo'),
+            'id' => Yii::t('app/backend', 'ID'),
+            'parent_id' => Yii::t('app/backend', 'Parent ID'),
+            'title' => Yii::t('app/backend', 'Title'),
+            'description' => Yii::t('app/backend', 'Description'),
+            'address' => Yii::t('app/backend', 'Address'),
+            'email' => Yii::t('app/backend', 'Email'),
+            'phone' => Yii::t('app/backend', 'Phone'),
+            'latitude' => Yii::t('app/backend', 'Latitude'),
+            'longitude' => Yii::t('app/backend', 'Longitude'),
+            'logo' => Yii::t('app/backend', 'Logo'),
+            'file' => Yii::t('app/backend', 'Logo'),
         ];
+    }
+    
+    public static function getUploadDir() {
+        return Yii::getAlias('@frontend') . '/web/uploads/hospitals/';
+    }
+
+
+    public function uploadGallery()
+    {
+        $path = self::getUploadDir() . $this->primaryKey . '/gallery';
+        
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        
+        foreach ($this->galleryFiles as $file) {
+            $file->saveAs($path . '/' . $file->baseName  . '.' . $file->extension);
+            $imageGallery = new HospitalGalerry;
+            $imageGallery->image = $file->baseName  . '.' . $file->extension;
+            $imageGallery->hospital_id = $this->primaryKey;
+            $imageGallery->save();
+        }            
+    }
+    
+    public function getGallery()
+    {
+        return $this->hasMany(HospitalGalerry::className(), ['hospital_id' => 'id']);
+    }
+
+    public function setGallery($gallery)
+    {
+        $this->populateRelation('gallery', $gallery);
     }
 }

@@ -64,14 +64,21 @@ class HospitalController extends Controller
     public function actionCreate()
     {
         $model = new Hospital();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        
+        if ($model->load(Yii::$app->request->post())) {            
+            if($model->validate() && $model->save()) {
+                $model->galleryFiles = \yii\web\UploadedFile::getInstances($model, 'galleryFiles');
+                if ($model->uploadGallery()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }   
+            } else {
+                echo "<pre>"; print_r($model->getErrors());
+            }
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } 
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**

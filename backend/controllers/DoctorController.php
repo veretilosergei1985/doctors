@@ -201,7 +201,7 @@ class DoctorController extends Controller
         }
     }
     
-    public function actionDeleteImage() {    
+    public function actionDeleteImage() {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             $request = Yii::$app->request;
             $doctorId = $request->post('doctorId');

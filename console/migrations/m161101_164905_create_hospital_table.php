@@ -17,8 +17,8 @@ class m161101_164905_create_hospital_table extends Migration
             'address' => $this->string(255)->notNull(),
             'email' => $this->string(255),
             'phone' => $this->string(255)->notNull(),
-            'latitude' => $this->decimal(),
-            'longitude' => $this->decimal(),
+            'latitude' => $this->decimal(10, 6),
+            'longitude' => $this->decimal(10, 6),
             'logo' => $this->string(255),
         ]);
 

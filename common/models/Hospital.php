@@ -66,7 +66,7 @@ class Hospital extends \yii\db\ActiveRecord
             'file' => Yii::t('app/backend', 'Logo'),
         ];
     }
-    
+
     public static function getUploadDir() {
         return Yii::getAlias('@frontend') . '/web/uploads/hospitals/';
     }
@@ -75,11 +75,11 @@ class Hospital extends \yii\db\ActiveRecord
     public function uploadGallery()
     {
         $path = self::getUploadDir() . $this->primaryKey . '/gallery';
-        
+
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
-        
+
         foreach ($this->galleryFiles as $file) {
             $file->saveAs($path . '/' . $file->baseName  . '.' . $file->extension);
             $imageGallery = new HospitalGalerry;

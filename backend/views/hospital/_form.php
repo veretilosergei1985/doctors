@@ -97,14 +97,41 @@ use kartik\widgets\FileInput;
             <?= $form->field($model, 'file')->widget(FileInput::classname(), $options); ?>
             
             <?php $options = [
-                    'options'=>[
+                    'options' => [
+                        'accept' => 'image/*',
                         'multiple'=>true
                     ],
                     'pluginOptions' => [
-                        'uploadUrl' => \yii\helpers\Url::to(['/hosrital/create']),
-                        'maxFileCount' => 10
+                        'showRemove' => false,
+                        'showUpload' => false,
+                        'initialPreviewAsData' => true,
+                        'initialCaption' => "",
+                        'removeIcon' => '<i id="remove-doctor-image" class="glyphicon glyphicon-trash"></i> ',
+                        'overwriteInitial'=>false,
+
+                        'initialPreviewConfig' => [
+                        [
+                            "caption" => 'desert.jpg',
+                            "width" => '120px',
+                            "key" => 100,
+                        ],
+                        [
+                            "caption" => 'desert.jpg',
+                            "width" => '120px',
+                            "key" => 101,
+                        ]
+                    ]
                     ]
                 ];
+
+                if (!empty($model->gallery)) {
+                    $initialPreview = [];
+                    foreach($model->gallery as $image) {
+                        $initialPreview[] = Yii::$app->params['frontendBaseUrl'] . '/uploads/hospitals/' . $model->primaryKey . '/gallery/' . $image->image;
+                        $options['pluginOptions']['initialPreviewConfig'][] = ['caption' => 'image.jpg'];
+                    }
+                    $options['pluginOptions']['initialPreview'] = $initialPreview;
+                }
             ?>
           
             <?= $form->field($model, 'galleryFiles[]')->widget(FileInput::classname(), $options); ?>

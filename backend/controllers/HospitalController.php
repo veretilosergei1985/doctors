@@ -65,16 +65,13 @@ class HospitalController extends Controller
     {
         $model = new Hospital();
         
-        if ($model->load(Yii::$app->request->post())) {            
+        if ($model->load(Yii::$app->request->post())) {
             if($model->validate() && $model->save()) {
                 $model->galleryFiles = \yii\web\UploadedFile::getInstances($model, 'galleryFiles');
                 if ($model->uploadGallery()) {
                     return $this->redirect(['view', 'id' => $model->id]);
                 }   
-            } else {
-                echo "<pre>"; print_r($model->getErrors());
             }
-            //return $this->redirect(['view', 'id' => $model->id]);
         } 
         return $this->render('create', [
             'model' => $model,
@@ -91,12 +88,33 @@ class HospitalController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->validate() && $model->save()) {
+                $model->galleryFiles = \yii\web\UploadedFile::getInstances($model, 'galleryFiles');
+                if ($model->uploadGallery()) {
+                    return $this->redirect(['update', 'id' => $model->id]);
+                }
+            }
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionDeleteImage() {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $request = Yii::$app->request;
+            $doctorId = $request->post('doctorId');
+            $model = $this->findModel($doctorId);
+            $model->image = null;
+            if($model->save(false)) {
+                @unlink(Yii::getAlias('@frontend') . '/web/uploads/doctors/' . $model->primaryKey . '/image.jpg');
+                echo Json::encode([
+                    'success' => true,
+                ]);
+                Yii::$app->end();
+            }
         }
     }
 

@@ -108,19 +108,6 @@ use kartik\widgets\FileInput;
                         'initialCaption' => "",
                         'removeIcon' => '<i id="remove-doctor-image" class="glyphicon glyphicon-trash"></i> ',
                         'overwriteInitial'=>false,
-
-                        'initialPreviewConfig' => [
-                        [
-                            "caption" => 'desert.jpg',
-                            "width" => '120px',
-                            "key" => 100,
-                        ],
-                        [
-                            "caption" => 'desert.jpg',
-                            "width" => '120px',
-                            "key" => 101,
-                        ]
-                    ]
                     ]
                 ];
 
@@ -128,7 +115,10 @@ use kartik\widgets\FileInput;
                     $initialPreview = [];
                     foreach($model->gallery as $image) {
                         $initialPreview[] = Yii::$app->params['frontendBaseUrl'] . '/uploads/hospitals/' . $model->primaryKey . '/gallery/' . $image->image;
-                        $options['pluginOptions']['initialPreviewConfig'][] = ['caption' => 'image.jpg'];
+                        $options['pluginOptions']['initialPreviewConfig'][] = [
+                            'caption' => $image->image,
+                            'key' => $image->primaryKey,
+                        ];
                     }
                     $options['pluginOptions']['initialPreview'] = $initialPreview;
                 }

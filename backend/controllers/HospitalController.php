@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Hospital;
 use backend\models\HospitalSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,10 +21,24 @@ class HospitalController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['index', 'update', 'delete-image', 'create', 'view'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -104,6 +119,7 @@ class HospitalController extends Controller
 
     public function actionDeleteImage() {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            echo "123123"; exit;
             $request = Yii::$app->request;
             $doctorId = $request->post('doctorId');
             $model = $this->findModel($doctorId);

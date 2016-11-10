@@ -1,10 +1,4 @@
-/**
- * ShowMe project controller script for the action "create".
- *
- * @author Andrey Klimenko <andrey.iemail@gmail.com>
- */
-
-// Namespace for project the controller
+// Namespace for hospital the controller
 if (typeof doctorBackend.controllers.hospital == 'undefined') {
     doctorBackend.controllers.hospital = {};
 }
@@ -27,14 +21,6 @@ doctorBackend.controllers.hospital.update = (function ($) {
 
             loadScript();
             window.initialize = initMap;
-
-            $("#w1").change(function() {
-                var reader = new FileReader();
-                reader.onload = function() {
-                    $('.kv-file-zoom').remove();
-                };
-                $('.kv-file-zoom').remove();
-            });
 
             function initMap() {
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -102,16 +88,24 @@ doctorBackend.controllers.hospital.update = (function ($) {
                     infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                     infowindow.open(map, marker);
                 });
-
-
             }
 
-        },
-        showSimple: function () {
-            setCurrentLocation();
-        },
+            this.initHandlers();
 
+        },
         initHandlers: function () {
+            $(document).on('click', '.kv-file-remove', function() {
+                var postData = {
+                    imageId: $(this).data('key')
+                };
+
+                $.post('/hospital/delete-image', postData, function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.success == true) {
+                        $('.file-preview ').remove();
+                    }
+                });
+            });
         }
     };
     

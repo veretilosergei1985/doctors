@@ -86,8 +86,21 @@ class Hospital extends \yii\db\ActiveRecord
             $imageGallery->image = $file->baseName  . '.' . $file->extension;
             $imageGallery->hospital_id = $this->primaryKey;
             $imageGallery->save();
-        }            
+        }
     }
+    
+    public function uploadLogo()
+    {
+        if ($this->file) {
+            $path = Yii::getAlias('@frontend') . '/web/uploads/hospitals/' . $this->primaryKey;
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $this->file->saveAs($path . '/logo.jpg');
+            $this->logo = 'logo.jpg';
+            $this->save(false);
+        }        
+     }
     
     public function getGallery()
     {

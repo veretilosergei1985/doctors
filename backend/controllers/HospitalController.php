@@ -82,10 +82,15 @@ class HospitalController extends Controller
         
         if ($model->load(Yii::$app->request->post())) {
             if($model->validate() && $model->save()) {
+                
+                $model->file = \yii\web\UploadedFile::getInstance($model, 'file');
                 $model->galleryFiles = \yii\web\UploadedFile::getInstances($model, 'galleryFiles');
-                if ($model->uploadGallery()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }   
+                
+                $model->uploadGallery();
+                $model->uploadLogo();
+                
+                return $this->redirect(['view', 'id' => $model->id]);
+                  
             }
         } 
         return $this->render('create', [
@@ -105,34 +110,21 @@ class HospitalController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if($model->validate() && $model->save()) {
+                $model->file = \yii\web\UploadedFile::getInstance($model, 'file');
                 $model->galleryFiles = \yii\web\UploadedFile::getInstances($model, 'galleryFiles');
-                if ($model->uploadGallery()) {
-                    return $this->redirect(['update', 'id' => $model->id]);
-                }
+                
+                $model->uploadGallery();
+                $model->uploadLogo();
+                
+                return $this->redirect(['update', 'id' => $model->id]);
+                
             }
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
-
-    public function actionDeleteImage() {
-        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            echo "123123"; exit;
-            $request = Yii::$app->request;
-            $doctorId = $request->post('doctorId');
-            $model = $this->findModel($doctorId);
-            $model->image = null;
-            if($model->save(false)) {
-                @unlink(Yii::getAlias('@frontend') . '/web/uploads/doctors/' . $model->primaryKey . '/image.jpg');
-                echo Json::encode([
-                    'success' => true,
-                ]);
-                Yii::$app->end();
-            }
-        }
-    }
+    }    
 
     /**
      * Deletes an existing Hospital model.

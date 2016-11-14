@@ -95,14 +95,18 @@ doctorBackend.controllers.hospital.update = (function ($) {
         },
         initHandlers: function () {
             $(document).on('click', '.kv-file-remove', function() {
+                var element = this;
+                var csrfToken = $('meta[name="csrf-token"]').attr("content");
+                var imageId = $(this).data('key');
                 var postData = {
-                    imageId: $(this).data('key')
+                    imageId: imageId,
+                    _csrf: yii.getCsrfToken()
                 };
 
-                $.post('/hospital/delete-image', postData, function (data) {
+                $.post('/hospital-gallery/delete-image', postData, function (data) {
                     var obj = $.parseJSON(data);
                     if (obj.success == true) {
-                        $('.file-preview ').remove();
+                        $(element).closest('.file-preview-frame').remove();
                     }
                 });
             });

@@ -44,7 +44,8 @@ return [
             'class' => 'sadovojav\image\Thumbnail',
         ],
         'request'   => [
-            'cookieValidationKey'   => 'dsfsydf78sd8fhw8yfdbw8y'
+            'cookieValidationKey'   => 'dsfsydf78sd8fhw8yfdbw8y',
+            'enableCsrfValidation' => true,
         ],
         'i18n' => [
             'translations' => [

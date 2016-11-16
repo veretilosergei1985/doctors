@@ -12,7 +12,7 @@ $this->title = Yii::t('app/backend', 'Update Hospital', [
 ]) . ' : ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/backend', 'Hospitals'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app/backend', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('app/backend', 'Update Hospital');
 ?>
 <div class="hospital-update">
     <?= $this->render('_form', [

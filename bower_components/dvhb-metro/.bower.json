@@ -1,0 +1,34 @@
+{
+  "name": "dvhb-metro",
+  "version": "0.4.1",
+  "authors": [
+    "DevHub <hello@dvhb.ru>"
+  ],
+  "license": "MIT License, http://www.opensource.org/licenses/MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/components",
+    "test",
+    "tests",
+    "src"
+  ],
+  "dependencies": {
+    "angularjs": ">=1.2"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.4"
+  },
+  "homepage": "https://github.com/dvhbru/dvhb-metro",
+  "_release": "0.4.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.4.1",
+    "commit": "5fb017610571ad808b70de592d830bda96510e98"
+  },
+  "_source": "https://github.com/dvhbru/dvhb-metro.git",
+  "_target": "^0.4.1",
+  "_originalSource": "dvhb-metro",
+  "_direct": true
+}

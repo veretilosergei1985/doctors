@@ -62,6 +62,7 @@
                     ],
                     ['label' => Yii::t('app/backend', 'Doctors'), 'icon' => 'fa fa-user-md', 'url' => ['/doctors']],
                     ['label' => Yii::t('app/backend', 'Hospitals'), 'icon' => 'fa fa-user-md', 'url' => ['/hospitals']],
+                    ['label' => Yii::t('app/backend', 'Metro stations'), 'icon' => 'fa fa-user-md', 'url' => ['/stations']],
                 ],
             ]
         ) ?>

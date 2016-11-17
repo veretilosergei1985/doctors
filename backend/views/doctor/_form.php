@@ -25,8 +25,7 @@ use kartik\widgets\FileInput;
 
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'experience')->widget(\kartik\widgets\TouchSpin::classname(), []);
-            ?>
+            <?= $form->field($model, 'experience')->widget(\kartik\widgets\TouchSpin::classname(), []); ?>
 
             <div id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="card">

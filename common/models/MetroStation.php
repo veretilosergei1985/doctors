@@ -14,6 +14,7 @@ use Yii;
  * @property string $color
  * @property integer $left
  * @property integer $top
+ * @property integer $status
  */
 class MetroStation extends \yii\db\ActiveRecord
 {
@@ -31,9 +32,10 @@ class MetroStation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'left', 'top', 'status'], 'required'],
-            [['city_id', 'line_id', 'left', 'top'], 'integer'],
+            [['title', 'city_id', 'left', 'top'], 'required'],
+            [['city_id', 'line_id', 'left', 'top', 'status'], 'integer'],
             [['title', 'color'], 'string', 'max' => 255],
+            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
         ];
     }
 
@@ -50,6 +52,7 @@ class MetroStation extends \yii\db\ActiveRecord
             'color' => Yii::t('app', 'Color'),
             'left' => Yii::t('app', 'Left'),
             'top' => Yii::t('app', 'Top'),
+            'status' => Yii::t('app', 'Status'),
         ];
     }
 }

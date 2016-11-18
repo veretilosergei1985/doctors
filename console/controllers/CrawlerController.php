@@ -14,19 +14,25 @@
 
 namespace console\controllers;
 
+use common\models\City;
 use yii\console\Controller;
 
 use console\helpers;
 
 class CrawlerController extends Controller {
-    public function actionGetStations()
+    public function actionGetStations($city, $url)
     {
-        $curl = new helpers\Curl('https://doc.ua/kliniki/kharkov/all');
+        $curl = new helpers\Curl($url.$city.'/all');
         $content = $curl->GET();
-        
+
         if (!empty($content)) {
             preg_match_all('/<label class="pill with-icon\s?(icon-left)?\s?color-(.*?)"data-value=\"(.*?)\"style=left:(.*?)px;top:(.*?)px><input type=checkbox><span><span>(.*?)<\/span><\/span><\/label>/s', $content, $matches);
-            if ($matches) {
+
+            //echo "<pre>"; print_r($matches); exit;
+
+            $cityModel = City::find()->where(['code' => $city])->one();
+
+            if ($matches && $cityModel) {
                 $stations = [];
                 unset($matches[0]);
                 unset($matches[1]);
@@ -49,21 +55,27 @@ class CrawlerController extends Controller {
                 foreach ($matches[2] as $i => $color) {
                     $stations[$i]['color'] = $color;
                 }
-                
+
                 //echo "<pre>"; print_r($stations); exit;
-                
+
                 foreach ($stations as $station) {
                     $stationModel = new \common\models\MetroStation();
-                    $stationModel->title = $station['name'];
-                    $stationModel->left = $station['left'];
-                    $stationModel->top = $station['top'];
-                    $stationModel->color = $station['color'];
-                    $stationModel->status = 1;
-                                        
-                    if ($stationModel->save()) {
-                        echo $stationModel->primaryKey . " saved\n";
-                    } else {
-                        throw new \yii\console\Exception('Save station model error');
+                    $stationModelSearch = clone $stationModel;
+
+                    $result = $stationModelSearch->find()->where(['like', 'title', $station['name']])->one();
+                    if ($result == null) {
+                        $stationModel->city_id = $cityModel->primaryKey;
+                        $stationModel->title = $station['name'];
+                        $stationModel->left = $station['left'];
+                        $stationModel->top = $station['top'];
+                        $stationModel->color = $station['color'];
+                        $stationModel->status = 1;
+
+                        if ($stationModel->save()) {
+                            echo $stationModel->primaryKey . " saved\n";
+                        } else {
+                            throw new \yii\console\Exception('Save station model error');
+                        }
                     }
                 }
             }

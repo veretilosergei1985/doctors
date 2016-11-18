@@ -28,6 +28,8 @@ use yii\widgets\ActiveForm;
                     'max' => 1000,]
                 ]); 
             ?>
+
+            <?= $form->field($model, 'color')->textInput(['maxlength' => true]) ?>
             
             <?= $form->field($model, 'status')->checkbox(); 
             ?>

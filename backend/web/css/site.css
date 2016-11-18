@@ -160,3 +160,55 @@ a.desc:after {
 #hospital-address_tmp:focus {
     border-color: #4d90fe;
 }
+
+.metro-map {
+    width: 895px;
+    height: 565px;
+    margin: 0 auto;
+}
+
+.metro-map label {
+    position: absolute;
+    font-size: 12px;
+    font-weight: normal;
+}
+.metro-map span {
+    border-bottom: 1px dotted;
+}
+
+.metro-map input {
+    opacity: 0;
+}
+
+.metro-block input:checked+span:hover>span {
+    border-bottom-color: transparent;
+}
+
+.metro-block.color-blue input:checked+span {
+    background-color: #0068b5;
+}
+
+.metro-block.color-green input:checked+span {
+    background-color: green;
+}
+
+.metro-block.color-red input:checked+span {
+    background-color: red;
+}
+
+.metro-block[class*=color-] input:checked+span {
+    color: #fff;
+}
+
+.metro-block.cross-icon input+span:after {
+    display: none;
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    background-image: url('/images/icons/cancel-red.png');
+    background-position: -904px -790px;
+    width: 13px;
+    height: 13px;
+    margin-top: -6.5px;
+    opacity: .3;

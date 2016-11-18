@@ -100,7 +100,7 @@ class Hospital extends \yii\db\ActiveRecord
             $this->logo = 'logo.jpg';
             $this->save(false);
         }        
-     }
+    }
     
     public function getGallery()
     {

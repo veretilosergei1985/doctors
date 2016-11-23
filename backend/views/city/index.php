@@ -8,11 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="city-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app/backend', 'Create City'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <p><?= Html::a(Yii::t('app/backend', 'Create City'), ['create'], ['class' => 'btn btn-success']) ?></p>
 
     <?php
     $gridColumns = [
@@ -22,11 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'width' => '36px',
             'header' => '',
             'headerOptions' => ['class' => 'kartik-sheet-style']
-        ],
-        [
-            'class' => 'kartik\grid\RadioColumn',
-            'width' => '36px',
-            'headerOptions' => ['class' => 'kartik-sheet-style'],
         ],
         [
             'class' => 'kartik\grid\ExpandRowColumn',

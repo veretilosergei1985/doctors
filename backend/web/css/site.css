@@ -212,3 +212,16 @@ a.desc:after {
     height: 13px;
     margin-top: -6.5px;
     opacity: .3;
+}
+
+.schedue-fields {
+    display: block;
+}
+
+.schedue-fields input {
+    width: 46%;
+}
+
+.remove-schedule {
+    width: 8%;
+}

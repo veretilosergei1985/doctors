@@ -110,6 +110,19 @@ doctorBackend.controllers.hospital.update = (function ($) {
                     }
                 });
             });
+
+            $('#add-schedule').click(function() {
+                var element = $('.schedue-fields:last').clone();
+                $(".schedue-fields:last").after(element);
+                $('.remove-schedule:not(:first)').css('visibility', 'visible');
+
+                $('.remove-schedule').click(function(e) {
+                    e.preventDefault();
+                    $(this).closest('.schedue-fields').remove();
+                });
+
+            });
+
         }
     };
     

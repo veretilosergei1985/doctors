@@ -126,6 +126,22 @@ use kartik\widgets\FileInput;
           
             <?= $form->field($model, 'galleryFiles[]')->widget(FileInput::classname(), $options); ?>
 
+            <label class="control-label" for="hospital-galleryfiles">Work hours</label>
+            <div class="">
+                    <a id="add-schedule" class="btn btn-success" title="Add Schedule" href="#" type="button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </a>
+                    <div class="schedue-fields">
+                        <?= Html::input('text', 'Hospital[schedue[day][]]', null, ['id' => 'schedule-day', 'class' => 'form-control col-xs-3']) ?>
+                        <?= Html::input('text', 'Hospital[schedue[time][]]', null, ['id' => 'schedule-time', 'class' => 'form-control col-xs-3']) ?>
+                        <button style="visibility: hidden;" class="btn btn-danger remove-schedule">-</button>
+                    </div>
+
+            </div>
+            
+            
+
+
         </div>
     </div>
 

@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'top')->widget(\kartik\widgets\TouchSpin::classname(), [
                 'pluginOptions' => [
-                    'min' => 0,
+                    'min' => -1000,
                     'max' => 1000,]
                 ]); 
             ?>

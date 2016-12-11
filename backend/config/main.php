@@ -74,6 +74,7 @@ return [
                 'doctor/info/<id:\d+>' => 'doctor/info',
                 'doctor/delete-image' => 'doctor/delete-image',
                 'hospitals' => 'hospital/index',
+                'hospital/delete-schedule' => 'hospital/delete-schedule',
                 'stations' => 'metro-station/index',
                 'cities' => 'city/index',
             ],

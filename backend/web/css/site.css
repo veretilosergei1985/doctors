@@ -214,14 +214,19 @@ a.desc:after {
     opacity: .3;
 }
 
-.schedue-fields {
+.schedule-fields {
     display: block;
+    margin-top: 7px;
 }
 
-.schedue-fields input {
-    width: 46%;
+.schedule-fields input {
+    width: 30%;
 }
 
 .remove-schedule {
-    width: 8%;
+    width: 5%;
+}
+
+#schedule-time {
+    margin-left: 7px;
 }

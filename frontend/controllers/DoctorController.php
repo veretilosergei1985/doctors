@@ -17,6 +17,8 @@ use yii\web\NotFoundHttpException;
  */
 class DoctorController extends Controller
 {
+    const DOCTRORS_PER_PAGE = 5;
+    
     public function init()
     {
         $this->layout = 'pages';
@@ -46,11 +48,14 @@ class DoctorController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Doctor::find()->orderBy('id DESC'),
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => self::DOCTRORS_PER_PAGE,
             ],
             //'sort' => ['attributes' => ['fullName']],
         ]);
-        return $this->render('index', ['listDataProvider' => $dataProvider]);
+        return $this->render('index', [
+            'listDataProvider' => $dataProvider,
+            'doctorsPerPage' => self::DOCTRORS_PER_PAGE,
+        ]);
     }
 
     public function actionView($id)

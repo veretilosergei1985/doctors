@@ -1,0 +1,303 @@
+/* =selectBox styles
+-------------------------------------------------------------- */
+
+/* Dropdown control */
+.selectBox-dropdown {
+
+}
+
+.selectBox-dropdown-menu a:hover {
+	text-decoration: none;
+}
+
+.selectBox-dropdown.selectBox-menuShowing-bottom {
+	-moz-border-radius-bottomleft: 0;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-bottom-left-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.selectBox-dropdown.selectBox-menuShowing-top {
+	-moz-border-radius-topleft: 0;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-left-radius: 0;
+	-webkit-border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.selectBox-dropdown .selectBox-label {
+	width:100% !important;
+	padding: 2px 8px;
+	font-size: 14px;
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #999999;
+	background: url("../img/divider_with_caret.png") no-repeat 95% 50% ;
+}
+
+
+/*.selectBox-dropdown:focus .selectBox-arrow {*/
+	/*position: absolute;*/
+	/*top: 0;*/
+	/*right: 0;*/
+	/*width: 23px;*/
+	/*height: 100%;*/
+	/*background: url('../img/select-arrow.png') 50% center no-repeat;*/
+	/*border-left: solid 1px #999999;*/
+/*}*/
+
+.selectBox-dropdown .selectBox-arrow {
+	position: absolute;
+	top: 45%;
+	right: 0;
+	height: 50%;
+	margin: 0 12px 0 10px
+}
+
+/* Dropdown menu */
+.selectBox-dropdown-menu {
+	position: absolute;
+	z-index: 99999;
+	min-height: 1em;
+	border: solid 1px #ccd4d9; /* should be the same border width as .selectBox-dropdown */
+	background: #FFF;
+	-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+	overflow: visible;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* Inline control */
+.selectBox-inline {
+	min-width: 150px;
+	outline: none;
+	border: solid 1px #BBB;
+	background: #FFF;
+	display: inline-block;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	overflow: visible;
+}
+
+/*.selectBox-inline:focus {*/
+	/*border-color: #666;*/
+/*}*/
+
+/* Options */
+.selectBox-options,
+.selectBox-options LI,
+.selectBox-options LI A {
+	list-style: none;
+	display: block;
+	cursor: default;
+	padding: 0;
+	margin: 0;
+}
+
+.selectBox-options.selectBox-options-top{
+	border-bottom:none;
+	margin-top:1px;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-left-radius: 0px;
+	-webkit-border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.selectBox-options.selectBox-options-bottom{
+	border-top:none;
+	-moz-border-radius-bottomleft: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.selectBox-options li a {
+	line-height: 36px;
+	font-size: 13px;
+	padding: 0 .5em;
+	white-space: pre-wrap;
+	overflow: hidden;
+	color: #999999;
+	background: 6px center no-repeat;
+}
+
+.selectBox-options LI.selectBox-hover A {
+	background-color: #EEE;
+}
+
+.selectBox-options LI.selectBox-disabled A {
+	color: #888;
+	background-color: transparent;
+}
+
+.selectBox-options LI.selectBox-selected A {
+	background-color: #999999;
+	color: #fff;
+}
+
+.selectBox-options .selectBox-optgroup {
+	color: #9a9a9a;
+	background: #EEE;
+	font-size: 13px;
+	line-height: 2.5;
+	padding: 0 0.5em;
+	white-space: pre-wrap;
+}
+
+/* Disabled state */
+.selectBox.selectBox-disabled {
+	color: #888 !important;
+}
+
+.selectBox-dropdown.selectBox-disabled .selectBox-arrow {
+	opacity: .5;
+	border-color: #666;
+}
+
+.selectBox-inline.selectBox-disabled {
+	color: #888 !important;
+}
+
+.selectBox-inline.selectBox-disabled .selectBox-options A {
+	background-color: transparent !important;
+}
+
+.ik_select {
+	margin-top: 10px;
+	width: 100%;
+}
+
+.ik_select_link{
+	padding:10px 35px 10px 20px;
+	background:#eee;
+	-webkit-border-radius:5px;
+	border-radius: 0;
+	height: 44px;
+	color:#999999;
+	cursor: pointer;
+}
+
+.ik_select_link:after,
+.intro-select2-link .ik_select_link_inner:after {
+	position:absolute;
+	top:50%;
+	right:10px;
+	width: 30px;
+	height: 30px;
+	font-size:20px;
+	line-height:24px;
+	margin-top:-15px;
+	content: '';
+	background: url("../img/divider_with_caret.png") no-repeat 0 50% ;
+}
+
+.ik_select_link.ik_select_link_focus {
+	box-shadow: none;
+}
+
+.ik_select_link.ik_select_link_disabled {
+	opacity:.5;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter:alpha(opacity=50)
+}
+
+.ik_select_link_text {
+	display:block;
+	overflow:hidden;
+	white-space:nowrap;
+	font-size: 14px;
+	line-height: 25px;
+	-o-text-overflow:ellipsis;
+	text-overflow:ellipsis
+}
+
+.ik_select_dropdown {
+	min-height: 1em;
+	border: solid 1px #ccd4d9; /* should be the same border width as .selectBox-dropdown */
+	background: #FFF;
+	-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+	overflow: visible;
+	-webkit-overflow-scrolling: touch;
+	top:41px;
+}
+
+.ik_select_dropdown p {
+	margin:0;padding:5px 15px;
+}
+
+.ik_select_filter_wrap,
+.ik_select_nothing_found {
+	padding:5px 15px;
+}
+
+.ik_select_filter {
+	padding:3px 14px;
+	border:1px solid #333;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	font-weight:300;
+}
+
+.ik_select_filter:focus {
+	outline:none
+}
+
+
+
+.ik_select_list ul {
+	padding-left: 0;
+	list-style: none;
+	margin-bottom: 0;
+}
+
+.ik_select_list .ik_select_option {
+	padding:0 15px;
+	cursor: pointer;
+	color: #555;
+}
+
+.ik_select_list .ik_select_option.ik_select_hover {
+	background:#eee;
+}
+
+.ik_select_list .ik_select_option_disabled {
+	opacity:.5;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter:alpha(opacity=50)
+}
+
+.ik_select_list .ik_select_optgroup {
+	padding:5px 15px;
+}
+
+.ik_select_list .ik_select_optgroup .ik_select_option {
+	margin:0 -15px;
+	padding:0 30px
+}
+
+.ik_select_list .ik_select_optgroup_label {
+	padding-bottom:2px;
+	font-size:12px;
+}
+
+.ik_select_list {
+	line-height: 36px;
+	font-size: 13px;
+	padding: 0;
+	overflow: hidden;
+	background:#fff;
+	border-radius: 0;
+	cursor:default
+}

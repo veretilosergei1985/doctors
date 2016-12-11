@@ -29,7 +29,7 @@ class HospitalController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'update', 'delete-image', 'create', 'view'],
+                        'actions' => ['index', 'update', 'create', 'view', 'delete-schedule'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -38,7 +38,7 @@ class HospitalController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -78,8 +78,7 @@ class HospitalController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Hospital();
-        
+        $model = new Hospital();        
         if ($model->load(Yii::$app->request->post())) {
             if($model->validate() && $model->save()) {
                 
@@ -116,15 +115,48 @@ class HospitalController extends Controller
                 $model->uploadGallery();
                 $model->uploadLogo();
                 
+                $schedule = Yii::$app->request->post("Hospital")['schedule'];
+
+                if (count($schedule)) {
+                    $model->unlinkAll('schedules', true);
+                    foreach ($schedule['day'] as $i => $days) {
+                        $scheduleModel = new \common\models\HospitalShedule();
+                        $scheduleModel->hospital_id = $model->primaryKey;
+                        $scheduleModel->day = $days;
+                        $scheduleModel->time = $schedule['time'][$i];
+                        if ($scheduleModel->validate()) {
+                            $scheduleModel->save();
+                        }
+                    }
+                }
+                
                 return $this->redirect(['update', 'id' => $model->id]);
                 
             }
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);
-    }    
+    }
+    
+    /**
+     * Ajax post delete shedule record for hospital
+     * @return responce
+     */
+    public function actionDeleteSchedule() {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $request = Yii::$app->request;
+            $scheduleId = $request->post('scheduleId');
+            $model = \common\models\HospitalShedule::findOne($scheduleId);
+            if($model) {
+                $model->delete();
+                echo \yii\helpers\Json::encode([                    
+                    'success' => true,
+                ]);
+                Yii::$app->end();
+            }
+        }
+    }
 
     /**
      * Deletes an existing Hospital model.

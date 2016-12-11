@@ -214,6 +214,6 @@ class DoctorController extends Controller
                 ]);
                 Yii::$app->end();
             }
-        }        
+        }
     }
 }

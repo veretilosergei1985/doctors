@@ -112,17 +112,32 @@ doctorBackend.controllers.hospital.update = (function ($) {
             });
 
             $('#add-schedule').click(function() {
-                var element = $('.schedue-fields:last').clone();
-                $(".schedue-fields:last").after(element);
+                var element = $('.schedule-fields:last').clone();
+                $(".schedule-fields:last").after(element);
                 $('.remove-schedule:not(:first)').css('visibility', 'visible');
-
-                $('.remove-schedule').click(function(e) {
-                    e.preventDefault();
-                    $(this).closest('.schedue-fields').remove();
-                });
+                element.find('#schedule-day').val('');
+                element.find('#schedule-time').val('');                
+                removeSchedule();
 
             });
+            removeSchedule();
+            
+            function removeSchedule() {
+                $('.remove-schedule').click(function(e) {
+                    e.preventDefault();
+                    var element = this;
+                    var postData = {
+                        scheduleId: $(this).closest('.schedule-fields').attr('data-id')
+                    };
 
+                    $.post('/hospital/delete-schedule', postData, function (data) {
+                        var obj = $.parseJSON(data);
+                        if (obj.success == true) {
+                            $(element).closest('.schedule-fields').remove();
+                        }
+                    });  
+                });
+            }
         }
     };
     

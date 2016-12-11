@@ -23,5 +23,5 @@ doctorFrontend.common = {};
 jQuery(document).ready(function () {
     doctorFrontend.initModule(doctorFrontend);
     
-    $('.hello_world').pwstabs();
+    //$('.hello_world').pwstabs();
 });

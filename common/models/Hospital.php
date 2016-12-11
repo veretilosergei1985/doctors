@@ -46,7 +46,7 @@ class Hospital extends \yii\db\ActiveRecord
             [['galleryFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
         ];
     }
-
+    
     /**
      * @inheritdoc
      */
@@ -110,5 +110,15 @@ class Hospital extends \yii\db\ActiveRecord
     public function setGallery($gallery)
     {
         $this->populateRelation('gallery', $gallery);
+    }
+    
+    public function getSchedules()
+    {
+        return $this->hasMany(HospitalShedule::className(), ['hospital_id' => 'id']);
+    }
+
+    public function setSchedules($schedules)
+    {
+        $this->populateRelation('schedules', Schedules);
     }
 }

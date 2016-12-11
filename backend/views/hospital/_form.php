@@ -72,7 +72,7 @@ use kartik\widgets\FileInput;
 
         </div>
 
-        <div class="col-md-5 col-sm-5 col-xs-5">
+        <div class="col-md-7 col-sm-5 col-xs-5">
             
             <?php $options = [
                     'options' => ['accept' => 'image/*'],
@@ -128,15 +128,27 @@ use kartik\widgets\FileInput;
 
             <label class="control-label" for="hospital-galleryfiles">Work hours</label>
             <div class="">
-                    <a id="add-schedule" class="btn btn-success" title="Add Schedule" href="#" type="button">
-                        <i class="glyphicon glyphicon-plus"></i>
-                    </a>
-                    <div class="schedue-fields">
-                        <?= Html::input('text', 'Hospital[schedue[day][]]', null, ['id' => 'schedule-day', 'class' => 'form-control col-xs-3']) ?>
-                        <?= Html::input('text', 'Hospital[schedue[time][]]', null, ['id' => 'schedule-time', 'class' => 'form-control col-xs-3']) ?>
-                        <button style="visibility: hidden;" class="btn btn-danger remove-schedule">-</button>
+                <a id="add-schedule" class="btn btn-success" title="Add Schedule" type="button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </a>                                
+                <?php if(count($model->schedules)) {
+                        foreach ($model->schedules as $schedule) {
+                ?>
+                    <div class="schedule-fields" data-id="<?= $schedule->id ?>">
+                        <?= Html::input('text', 'Hospital[schedule][day][]', $schedule->day, ['id' => 'schedule-day', 'class' => 'form-control col-xs-2', 'placeholder' => Yii::t('app/backend', 'day(s)')]) ?>
+                        <?= Html::input('text', 'Hospital[schedule][time][]', $schedule->time, ['id' => 'schedule-time', 'class' => 'form-control col-xs-2', 'placeholder' => Yii::t('app/backend', 'time')]) ?>
+                        <button class="btn btn-danger remove-schedule">-</button>
                     </div>
-
+                <?php 
+                        }
+                     } else { 
+               ?>
+                <div class="schedule-fields">
+                    <?= Html::input('text', 'Hospital[schedule][day][]', null, ['id' => 'schedule-day', 'class' => 'form-control col-xs-2', 'placeholder' => Yii::t('app/backend', 'day(s)')]) ?>
+                    <?= Html::input('text', 'Hospital[schedule][time][]', null, ['id' => 'schedule-time', 'class' => 'form-control col-xs-2', 'placeholder' => Yii::t('app/backend', 'time')]) ?>
+                    <button style="visibility: hidden;" class="btn btn-danger remove-schedule">-</button>
+                </div>                
+                <?php } ?>
             </div>
             
             

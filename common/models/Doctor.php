@@ -41,6 +41,20 @@ class Doctor extends \yii\db\ActiveRecord
             [['description', 'details', 'education', 'association', 'course'], 'string'],
             [['first_name', 'middle_name', 'last_name', 'title', 'image'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => 'png, jpg'],
+            [['specialities', 'procedures', 'diseases'], 'safe']
+        ];
+    }
+    
+    public function behaviors() {
+        return [
+            [
+                'class' => \backend\components\behaviors\ManyHasManyBehavior::className(),
+                'relations' => [
+                    'specialities' => 'specialities',
+                    'procedures' => 'procedures',
+                    'diseases' => 'diseases',
+                ],
+            ],
         ];
     }
 
@@ -76,21 +90,11 @@ class Doctor extends \yii\db\ActiveRecord
         return $this->hasMany(Speciality::className(), ['id' => 'speciality_id'])
             ->viaTable('doctor_speciality', ['doctor_id' => 'id']);
     }
-
-    public function setSpecialities($specialities)
-    {
-        $this->populateRelation('specialities', $specialities);
-    }
-
+    
     public function getProcedures()
     {
         return $this->hasMany(Speciality::className(), ['id' => 'procedure_id'])
             ->viaTable('doctor_procedure', ['doctor_id' => 'id']);
-    }
-
-    public function setProcedures($procedures)
-    {
-        $this->populateRelation('procedures', $procedures);
     }
 
     public function getDiseases()
@@ -98,36 +102,8 @@ class Doctor extends \yii\db\ActiveRecord
         return $this->hasMany(Disease::className(), ['id' => 'disease_id'])
             ->viaTable('doctor_disease', ['doctor_id' => 'id']);
     }
-
-    public function setDiseases($diseases)
-    {
-        $this->populateRelation('diseases', $diseases);
-    }
-
+    
     public function saveRelations()
     {
-        $this->unlinkAll('specialities', true);
-        $specialities = Yii::$app->request->post('Doctor')['specialities'];
-        if (!empty($specialities)) {
-            foreach ($specialities as $speciality) {
-                Yii::$app->db->createCommand()->batchInsert('doctor_speciality', ['doctor_id', 'speciality_id'], [[$this->primaryKey, $speciality]])->execute();
-            }
-        }
-
-        $this->unlinkAll('procedures', true);
-        $procedures = Yii::$app->request->post('Doctor')['procedures'];
-        if (!empty($procedures)) {
-            foreach ($procedures as $procedure) {
-                Yii::$app->db->createCommand()->batchInsert('doctor_procedure', ['doctor_id', 'procedure_id'], [[$this->primaryKey, $procedure]])->execute();
-            }
-        }
-
-        $this->unlinkAll('diseases', true);
-        $diseases = Yii::$app->request->post('Doctor')['diseases'];
-        if (!empty($diseases)) {
-            foreach ($diseases as $disease) {
-                Yii::$app->db->createCommand()->batchInsert('doctor_disease', ['doctor_id', 'disease_id'], [[$this->primaryKey, $disease]])->execute();
-            }
-        }
     }
 }

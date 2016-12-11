@@ -9,4 +9,6 @@ return [
     'Procedures' => 'Процедуры',
     'Diseases' => 'Заболевания',
     'Courses' => 'Курсы',
+    'Doctors' => 'Доктора',
+    'Professional Statement' => 'Профессиональные цели'
 ];

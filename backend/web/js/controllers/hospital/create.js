@@ -99,6 +99,17 @@ doctorBackend.controllers.hospital.create = (function ($) {
         },
 
         initHandlers: function () {
+            $('#add-schedule').click(function() {
+                var element = $('.schedule-fields:last').clone();
+                $(".schedule-fields:last").after(element);
+                $('.remove-schedule:not(:first)').css('visibility', 'visible');
+
+                $('.remove-schedule').click(function(e) {
+                    e.preventDefault();
+                    $(this).closest('.schedule-fields').remove();
+                });
+
+            });
         }
     };
     

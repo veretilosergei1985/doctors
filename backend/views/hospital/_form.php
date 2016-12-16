@@ -13,12 +13,33 @@ use kartik\widgets\FileInput;
 
 <div class="hospital-form" hospital-id="<?= $model->primaryKey; ?>">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(
+        [
+            'id'                     => 'hospital-form',
+            'enableAjaxValidation'   => true,
+            'enableClientValidation' => false,
+            'validateOnSubmit'       => true,
+            'validateOnChange'       => true,
+            'validationDelay'        => 400,
+            'options'                => [
+                'enctype' => 'multipart/form-data',
+            ],
+        ]
+    );
+    ?>
 
     <div class="row">
         <div class="col-md-5 col-sm-5 col-xs-5">
 
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+            <?=  $form
+                ->field($model, 'hospital_type', ['template' => '{input}{error}'])
+                ->radioList(
+                    \common\models\Hospital::$typeList
+                );
+            ?>
+
 
             <?= $form->field($model, 'parent_id')->widget(\kartik\widgets\Select2::classname(), [
                 'data' => ArrayHelper::map(\common\models\Hospital::find()->where(['parent_id' => 0])->all(),'id','title'),
@@ -150,8 +171,17 @@ use kartik\widgets\FileInput;
                 </div>                
                 <?php } ?>
             </div>
-            
-            
+
+            <?= $form->field($model, 'specializations')->widget(\kartik\widgets\Select2::classname(), [
+                'data' => ArrayHelper::map(\common\models\Specialization::find()->all(),'id','title'),
+                'options' => [
+                    'placeholder' => 'Select specialization ...',
+                    'multiple' => true
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])->label(Yii::t('app/backend', 'Specializations')); ?>
 
 
         </div>

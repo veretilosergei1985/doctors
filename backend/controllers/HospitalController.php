@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use kartik\form\ActiveForm;
 use Yii;
 use common\models\Hospital;
 use backend\models\HospitalSearch;
+use yii\base\Response;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -78,8 +80,24 @@ class HospitalController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Hospital();        
+        $model = new Hospital();
+        $model->hospital_type = Hospital::TYPE_ALONE;
+
+        if (\Yii::$app->request->isAjax) {
+            $model->load(Yii::$app->request->post());
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            if ($model->hospital_type == Hospital::TYPE_PARENT) {
+                $model->setScenario(Hospital::SCENARIO_CREATE_PARENT_HOSPITAL);
+            }
+
+            return ActiveForm::validate($model);
+        }
+
         if ($model->load(Yii::$app->request->post())) {
+            if ($model->hospital_type == Hospital::TYPE_PARENT) {
+                $model->setScenario(Hospital::SCENARIO_CREATE_PARENT_HOSPITAL);
+            }
             if($model->validate() && $model->save()) {
                 
                 $model->file = \yii\web\UploadedFile::getInstance($model, 'file');
@@ -87,6 +105,21 @@ class HospitalController extends Controller
                 
                 $model->uploadGallery();
                 $model->uploadLogo();
+
+                $schedule = Yii::$app->request->post("Hospital")['schedule'];
+
+                if (count($schedule)) {
+                    $model->unlinkAll('schedules', true);
+                    foreach ($schedule['day'] as $i => $days) {
+                        $scheduleModel = new \common\models\HospitalShedule();
+                        $scheduleModel->hospital_id = $model->primaryKey;
+                        $scheduleModel->day = $days;
+                        $scheduleModel->time = $schedule['time'][$i];
+                        if ($scheduleModel->validate()) {
+                            $scheduleModel->save();
+                        }
+                    }
+                }
                 
                 return $this->redirect(['view', 'id' => $model->id]);
                   
@@ -106,6 +139,11 @@ class HospitalController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        $model->hospital_type = Hospital::TYPE_ALONE;
+        if($model->parent_id) {
+            $model->hospital_type = Hospital::TYPE_PARENT;
+        }
 
         if ($model->load(Yii::$app->request->post())) {
             if($model->validate() && $model->save()) {

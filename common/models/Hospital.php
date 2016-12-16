@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $parent_id
+ * @property integer $hospital_type
  * @property string $title
  * @property string $description
  * @property string $address
@@ -22,6 +23,13 @@ class Hospital extends \yii\db\ActiveRecord
 {    
     public $file;    
     public $galleryFiles;
+    public $hospital_type;
+
+    const SCENARIO_DEFAULT                 = 'default';
+    const SCENARIO_CREATE_PARENT_HOSPITAL  = 'create_parent_hospital';
+
+    const TYPE_PARENT = 1;
+    const TYPE_ALONE = 2;
 
     /**
      * @inheritdoc
@@ -37,13 +45,45 @@ class Hospital extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id'], 'integer'],
-            [['title', 'address', 'phone'], 'required'],
+            [['parent_id, hospital_type'], 'integer'],
+            [['title', 'address', 'phone', 'hospital_type', 'description', 'latitude', 'longitude'], 'required'],
             [['description'], 'string'],
             [['latitude', 'longitude'], 'number'],
             [['title', 'address', 'email', 'phone', 'logo'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => 'png, jpg'],
+
+            [['title', 'description'], 'required', 'on' => self::SCENARIO_CREATE_PARENT_HOSPITAL],
+
             [['galleryFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
+            [['specializations'], 'safe']
+        ];
+    }
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_DEFAULT => [
+                'hospital_type', 'parent_id', 'title', 'description', 'address', 'phone', 'latitude', 'longitude', 'email', 'file', 'galleryFiles'
+            ],
+            self::SCENARIO_CREATE_PARENT_HOSPITAL => [
+                'hospital_type', 'title', 'description'
+            ]
+        ];
+    }
+
+    public static $typeList = [
+        self::TYPE_ALONE  => 'Is alone hospital',
+        self::TYPE_PARENT => 'Is parent hospital',
+    ];
+
+    public function behaviors() {
+        return [
+            [
+                'class' => \backend\components\behaviors\ManyHasManyBehavior::className(),
+                'relations' => [
+                    'specializations' => 'specializations',
+                ],
+            ],
         ];
     }
     
@@ -120,5 +160,11 @@ class Hospital extends \yii\db\ActiveRecord
     public function setSchedules($schedules)
     {
         $this->populateRelation('schedules', Schedules);
+    }
+
+    public function getSpecializations()
+    {
+        return $this->hasMany(Specialization::className(), ['id' => 'specialization_id'])
+            ->viaTable('hospital_specialization', ['hospital_id' => 'id']);
     }
 }

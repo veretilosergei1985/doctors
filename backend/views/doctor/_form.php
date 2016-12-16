@@ -13,7 +13,20 @@ use kartik\widgets\FileInput;
 
 <div class="doctor-form" doctor-id="<?= $model->primaryKey; ?>">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(
+        [
+            'id'                     => 'doctor-form',
+            'enableAjaxValidation'   => true,
+            'enableClientValidation' => false,
+            'validateOnSubmit'       => true,
+            'validateOnChange'       => true,
+            'validationDelay'        => 400,
+            'options'                => [
+                'enctype' => 'multipart/form-data',
+            ],
+        ]
+    );
+    ?>
 
     <div class="row">
         <div class="col-md-5 col-sm-5 col-xs-5">

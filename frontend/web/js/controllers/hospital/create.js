@@ -5,11 +5,11 @@
  */
 
 // Namespace for project the controller
-if (typeof doctorBackend.controllers.hospital == 'undefined') {
-    doctorBackend.controllers.hospital = {};
+if (typeof doctorFrontend.controllers.hospital == 'undefined') {
+    doctorFrontend.controllers.hospital = {};
 }
 
-doctorBackend.controllers.hospital.create = (function ($) {
+doctorFrontend.controllers.hospital.create = (function ($) {
 
     var fields = {
         hospitalLatitude: $("#hospital-latitude"),
@@ -96,20 +96,6 @@ doctorBackend.controllers.hospital.create = (function ($) {
                 });
             }
 
-            this.initHandlers();
-
-            $('input[name="Hospital[hospital_type]"]').change(function () {
-                if($(this).val() == 1) {
-                    $('.field-hospital-parent_id').hide();
-                } else {
-                    $('.field-hospital-parent_id').show();
-                }
-            });
-
-            if ($('input[name="Hospital[hospital_type]"]:checked').val() == 1) {
-                $('.field-hospital-parent_id').hide();
-            }
-
         },
 
         initHandlers: function () {
@@ -123,15 +109,6 @@ doctorBackend.controllers.hospital.create = (function ($) {
                     $(this).closest('.schedule-fields').remove();
                 });
 
-            });
-
-            // handle hospital type
-            $('input[name="Hospital[hospital_type]"]').change(function () {
-                if($(this).val() == 1) {
-                    $('.field-hospital-parent_id').hide();
-                } else {
-                    $('.field-hospital-parent_id').show();
-                }
             });
         }
     };

@@ -50,7 +50,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'header' => 'Parent',
                     'size' => 'md',
                 ];
-            }
+            },
+            'value' => function ($model, $key, $index, $column) {
+                return !is_null($model->parent_id) ? \common\models\Hospital::findOne($model->parent_id)->title : '';
+            },
         ],
         [
             'class' => 'kartik\grid\EditableColumn',

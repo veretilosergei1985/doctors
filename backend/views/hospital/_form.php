@@ -16,18 +16,18 @@ use kartik\widgets\FileInput;
     <?php $form = ActiveForm::begin(
         [
             'id'                     => 'hospital-form',
-            'enableAjaxValidation'   => true,
-            'enableClientValidation' => false,
-            'validateOnSubmit'       => true,
-            'validateOnChange'       => true,
-            'validationDelay'        => 400,
+//            'enableAjaxValidation'   => true,
+//            'enableClientValidation' => false,
+//            'validateOnSubmit'       => true,
+//            'validateOnChange'       => true,
+//            'validationDelay'        => 400,
             'options'                => [
                 'enctype' => 'multipart/form-data',
             ],
         ]
     );
     ?>
-
+    
     <div class="row">
         <div class="col-md-5 col-sm-5 col-xs-5">
 
@@ -41,16 +41,7 @@ use kartik\widgets\FileInput;
             ?>
 
 
-            <?= $form->field($model, 'parent_id')->widget(\kartik\widgets\Select2::classname(), [
-                'data' => ArrayHelper::map(\common\models\Hospital::find()->where(['parent_id' => 0])->all(),'id','title'),
-                'options' => [
-                    'placeholder' => 'Select parent hospital ...',
-                    'multiple' => true
-                ],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ])->label(Yii::t('app/backend', 'Parent hospital')); ?>
+            <?= $form->field($model, 'parent_id')->dropDownList(ArrayHelper::map(\common\models\Hospital::find()->where(['parent_id' => null])->all(),'id','title'), array('prompt' => Yii::t('app/backend', 'Select parent hospital')))->label(Yii::t('app/backend', 'Parent hospital')); ?>
 
             <div id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="card">

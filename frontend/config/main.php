@@ -54,6 +54,7 @@ return [
                 'doctor/view/<id:\d+>' => 'doctor/view',
                 'specialities' => 'speciality/index',
                 'doctors' => 'doctor/index',
+                'hospitals' => 'hospital/index',
                 'search' => 'site/search',
                 'site/signup' => 'site/signup',    
             ],

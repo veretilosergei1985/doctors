@@ -249,15 +249,15 @@ a.btn {
 	display: inline!important;
 }
 
-.doc_location {
+.doc_location, .hospital_location {
 	margin-top: 5px;
 }
 
-.doc_location .fa-map-marker {
+.doc_location .fa-map-marker, .hospital_location .fa-map-marker {
 	margin-top: 5px;
 }
 
-.doc_location .fa-map-marker:before {
+.doc_location .fa-map-marker:before, .hospital_location .fa-map-marker:before {
 	margin: 5px 8px 0 0;
 }
 
@@ -652,7 +652,7 @@ input[type='search']:focus {
 	margin-top: 40px;
 }
 
-.doctor_profile .doc_location {
+.doctor_profile .doc_location, .hospital_profile .hospital_location {
 	margin-top: -3px;
 }
 
@@ -847,17 +847,17 @@ img.avatar_square {
 	margin-right: 20px;
 }
 
-a.doc_name:hover {
+a.doc_name:hover, a.hospital_name:hover {
 	text-decoration: none;
 }
 
-h3.doc_name {
+h3.doc_name, h3.hospital_name {
 	font-weight: bold;
 	font-size: 21px;
 	color: #555;
 }
 
-.doctor_profile h3.doc_name {
+.doctor_profile h3.doc_name, .hospital_profile h3.hospital_name {
 	margin-bottom: 0;
 }
 
@@ -866,14 +866,14 @@ h3.doc_name {
 	height: 15px;
 }
 
-b.doc_name {
+b.doc_name, b.hospital_name {
 	//margin-right: 20px;
 	font-size: 15px;
 	color: #555555;
 	line-height: 32px;
 }
 
-small.doc_spec {
+small.doc_spec, small.hospital_spec {
 	font-size: 13px;
 }
 
@@ -1321,7 +1321,7 @@ h4.thumbnail-heading {
 }
 
 .alternate .profile.social,
-.alternate .doc_location {
+.alternate .doc_location, .alternate .hospital_location {
 	width: 200px;
 	margin-left: -20px;
 }
@@ -1330,7 +1330,7 @@ h4.thumbnail-heading {
 	margin-top: 0;
 }
 
-.alternate .doc_location {
+.alternate .doc_location, .alternate .hospital_location {
 	margin-top: 40px;
 }
 
@@ -2777,7 +2777,7 @@ h4.login_form_header {
 }
 
 @media all and (max-width: 768px) {
-	b.doc_name {
+	b.doc_name, b.hospital_name {
 		font-size: 13px;
 	}
 
@@ -3093,4 +3093,42 @@ h4.login_form_header {
 
 .profiles-loop li {
     list-style: none;
+}
+
+.hospital-schedule {
+  border: 1px dotted #e2e2e2;
+   border-radius: 7px;
+  margin-top: 10px;
+  min-height: 45px;
+}
+.hospital-schedule li
+{ 
+  padding: 0;
+  list-style-type:none;
+  border: 0px solid black;
+}
+
+.hospital-schedule .left {
+    float: left;
+    width: 40%;
+}
+
+.hospital-schedule .right {
+    float: left;
+    width: 50%;
+}
+
+.child-hospital {
+    
+}
+
+.child-hospital-divider {
+    margin: 10px -30px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.child-hospital-divider span {
+    position: relative;
+    display: inline-block;
 }

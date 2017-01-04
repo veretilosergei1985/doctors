@@ -112,6 +112,7 @@ AppAsset::register($this);
 					<ul class="nav navbar-inner navbar-nav navbar-left">
 						<li class="active"><a href="index.html">Home</a></li>
 						<li><a href="/doctors"><?= Yii::t('app/frontend', 'Doctors') ?></a></li>
+                                                <li><a href="/hospitals"><?= Yii::t('app/frontend', 'Hospitals') ?></a></li>
 						<li><a href="services.html">Services</a></li>
 						<li>
 							<button class="btn dropdown-toggle" type="button" id="dropdownMenuDivider1" data-toggle="dropdown">

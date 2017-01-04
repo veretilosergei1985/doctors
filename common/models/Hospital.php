@@ -46,13 +46,13 @@ class Hospital extends \yii\db\ActiveRecord
     {
         return [
             [['parent_id, hospital_type'], 'integer'],
-            [['title', 'address', 'phone', 'hospital_type', 'description', 'latitude', 'longitude'], 'required'],
+            [['title', 'address', 'phone', 'hospital_type', 'description', 'latitude', 'longitude'], 'required', 'on' => self::SCENARIO_DEFAULT],
             [['description'], 'string'],
             [['latitude', 'longitude'], 'number'],
             [['title', 'address', 'email', 'phone', 'logo'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => 'png, jpg'],
 
-            [['title', 'description'], 'required', 'on' => self::SCENARIO_CREATE_PARENT_HOSPITAL],
+            [['hospital_type', 'title', 'description'], 'required', 'on' => self::SCENARIO_CREATE_PARENT_HOSPITAL],
 
             [['galleryFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
             [['specializations'], 'safe']
@@ -63,10 +63,10 @@ class Hospital extends \yii\db\ActiveRecord
     {
         return [
             self::SCENARIO_DEFAULT => [
-                'hospital_type', 'parent_id', 'title', 'description', 'address', 'phone', 'latitude', 'longitude', 'email', 'file', 'galleryFiles'
+                'hospital_type', 'parent_id', 'title', 'description', 'address', 'phone', 'latitude', 'longitude', 'email', 'file', 'galleryFiles', 'specializations'
             ],
             self::SCENARIO_CREATE_PARENT_HOSPITAL => [
-                'hospital_type', 'title', 'description'
+                'hospital_type', 'title', 'description', 'specializations'
             ]
         ];
     }
@@ -142,6 +142,11 @@ class Hospital extends \yii\db\ActiveRecord
         }        
     }
     
+    public function getChildHospitals()
+    {
+        return $this->hasMany(self::className(), ['parent_id' => 'id']);
+    }
+
     public function getGallery()
     {
         return $this->hasMany(HospitalGalerry::className(), ['hospital_id' => 'id']);
@@ -159,7 +164,7 @@ class Hospital extends \yii\db\ActiveRecord
 
     public function setSchedules($schedules)
     {
-        $this->populateRelation('schedules', Schedules);
+        $this->populateRelation('schedules', $schedules);
     }
 
     public function getSpecializations()

@@ -129,6 +129,7 @@ doctorBackend.controllers.hospital.create = (function ($) {
             $('input[name="Hospital[hospital_type]"]').change(function () {
                 if($(this).val() == 1) {
                     $('.field-hospital-parent_id').hide();
+                    //$('.hospital-parent_id').attr('disabled', 'disabled');
                 } else {
                     $('.field-hospital-parent_id').show();
                 }

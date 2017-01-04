@@ -33,6 +33,7 @@ AppAsset::register($this);
 	<link rel="stylesheet" href="css/star-rating.css" media="all" type="text/css"/>
 	<link rel="stylesheet" href="css/font-awesome.min.css" media="all" type="text/css"/>
 	<link rel="stylesheet" href="css/theme.css" type="text/css" />
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -718,7 +719,10 @@ AppAsset::register($this);
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <script type="text/javascript" src="js/star-rating.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+
 <?php $this->endBody() ?>
+
+
 </body>
 </html>
 <?php $this->endPage() ?>

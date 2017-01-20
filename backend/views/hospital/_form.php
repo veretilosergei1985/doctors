@@ -16,11 +16,12 @@ use kartik\widgets\FileInput;
     <?php $form = ActiveForm::begin(
         [
             'id'                     => 'hospital-form',
-//            'enableAjaxValidation'   => true,
-//            'enableClientValidation' => false,
-//            'validateOnSubmit'       => true,
-//            'validateOnChange'       => true,
-//            'validationDelay'        => 400,
+            'method'                 => 'post',
+            'enableAjaxValidation'   => true,
+            'enableClientValidation' => false,
+            'validateOnSubmit'       => true,
+            'validateOnChange'       => true,
+            'validationDelay'        => 400,
             'options'                => [
                 'enctype' => 'multipart/form-data',
             ],
@@ -68,6 +69,8 @@ use kartik\widgets\FileInput;
             <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::className(), [
                 'mask' => '999-999-9999',
             ]) ?>
+
+            <?= $form->field($model, 'city_id')->dropDownList(ArrayHelper::map(\common\models\City::find()->all(),'id','title'), array('prompt' => Yii::t('app/backend', 'Select city')))->label(Yii::t('app/backend', 'City')); ?>
             
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
@@ -178,8 +181,12 @@ use kartik\widgets\FileInput;
         </div>
     </div>
 
+
+
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+<!--        <button type="button" class="btn btn-primary next-step">Save and continue</button>-->
+
+        <?= Html::submitButton($model->isNewRecord ? 'Save and continue' : 'Save and continue', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

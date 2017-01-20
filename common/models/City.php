@@ -54,6 +54,12 @@ class City extends \yii\db\ActiveRecord
         return $this->hasMany(MetroStation::className(), ['city_id' => 'id']);
     }
 
+    public function getDistricts()
+    {
+        return $this->hasMany(District::className(), ['id' => 'district_id'])
+            ->viaTable('city_district', ['city_id' => 'id']);
+    }
+
     public function uploadMetroMap()
     {
         if ($this->file) {

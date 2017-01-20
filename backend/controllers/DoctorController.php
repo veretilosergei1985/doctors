@@ -61,22 +61,6 @@ class DoctorController extends Controller
     {
         $searchModel = new DoctorSearch();
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => Doctor::find(),
-            'sort' => [
-                'attributes' => [
-                    'last_name',
-                    'first_name',
-                    'middle_name',
-                    'title',
-                    'experience',
-                ],
-            ],
-            'pagination' => [
-                'pageSize' => 2,
-            ],
-        ]);
-
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         return $this->render('index', [

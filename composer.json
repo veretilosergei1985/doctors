@@ -34,7 +34,8 @@
 		"bower-asset/pwstabs": "*",
 		"bower-asset/dvhb-metro": "*",
 		"yiisoft/yii2-jui": "^2.0",
-		"kartik-v/yii2-datecontrol": "dev-master"
+		"kartik-v/yii2-datecontrol": "dev-master",
+		"drsdre/yii2-wizardwidget": "*"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "*",

@@ -94,7 +94,7 @@ doctorBackend.controllers.hospital.update = (function ($) {
 
         },
         initHandlers: function () {
-            $(document).on('click', '.kv-file-remove', function() {
+            $(document).on('click', '.field-hospital-galleryfiles .kv-file-remove', function() {
                 var element = this;
                 var csrfToken = $('meta[name="csrf-token"]').attr("content");
                 var imageId = $(this).data('key');
@@ -107,6 +107,23 @@ doctorBackend.controllers.hospital.update = (function ($) {
                     var obj = $.parseJSON(data);
                     if (obj.success == true) {
                         $(element).closest('.file-preview-frame').remove();
+                    }
+                });
+            });
+
+            $(document).on('click', '.field-hospital-file .kv-file-remove', function() {
+                var element = this;
+                var csrfToken = $('meta[name="csrf-token"]').attr("content");
+                var postData = {
+                    hospitalId: $('.hospital-form').attr('hospital-id'),
+                    _csrf: yii.getCsrfToken()
+                };
+
+                $.post('/hospital/delete-image', postData, function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.success == true) {
+                        $(element).closest('.file-preview-frame').remove();
+                        $(element).closest('.file-preview').remove();
                     }
                 });
             });

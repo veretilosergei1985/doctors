@@ -1,9 +1,33 @@
 <?php
 
 namespace backend\controllers;
+use yii\filters\AccessControl;
 
 class HospitalGalleryController extends \yii\web\Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['delete-image'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionDeleteImage() {
         if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
             $request = \Yii::$app->request;

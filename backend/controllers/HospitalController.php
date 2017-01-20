@@ -31,7 +31,7 @@ class HospitalController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'update', 'create', 'view', 'delete-schedule'],
+                        'actions' => ['index', 'update', 'create', 'view', 'delete-schedule', 'delete-image'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -78,10 +78,83 @@ class HospitalController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id = '', $step = '')
     {
-        $model = new Hospital();
+        if ($step == 'info') {
+            $model = new Hospital();
+            $model->hospital_type = Hospital::TYPE_ALONE;
+
+            if (\Yii::$app->request->isAjax) {
+                $model->load(Yii::$app->request->post());
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+                if ($model->hospital_type == Hospital::TYPE_PARENT) {
+                    $model->setScenario(Hospital::SCENARIO_CREATE_PARENT_HOSPITAL);
+                }
+
+                return ActiveForm::validate($model);
+            }
+
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->hospital_type == Hospital::TYPE_PARENT) {
+                    $model->setScenario(Hospital::SCENARIO_CREATE_PARENT_HOSPITAL);
+                }
+                if ($model->validate() && $model->save()) {
+
+                    $model->file = \yii\web\UploadedFile::getInstance($model, 'file');
+                    $model->galleryFiles = \yii\web\UploadedFile::getInstances($model, 'galleryFiles');
+
+                    $model->uploadGallery();
+                    $model->uploadLogo();
+
+                    $schedule = Yii::$app->request->post("Hospital")['schedule'];
+
+                    if (count($schedule)) {
+                        $model->unlinkAll('schedules', true);
+                        foreach ($schedule['day'] as $i => $days) {
+                            $scheduleModel = new \common\models\HospitalShedule();
+                            $scheduleModel->hospital_id = $model->primaryKey;
+                            $scheduleModel->day = $days;
+                            $scheduleModel->time = $schedule['time'][$i];
+                            if ($scheduleModel->validate()) {
+                                $scheduleModel->save();
+                            }
+                        }
+                    }
+
+                    return $this->redirect(['create', 'id' => $model->id, 'step' => 'location']);
+
+                }
+            }
+
+//            return $this->render('create', [
+//                'model' => $model,
+//            ]);
+        } else if (!empty($id) && $step == 'location') {
+            $model = $this->findModel($id);
+            
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'step' => $step,
+        ]);
+    }
+
+    /**
+     * Updates an existing Hospital model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
         $model->hospital_type = Hospital::TYPE_ALONE;
+        if(!$model->parent_id) {
+            $model->hospital_type = Hospital::TYPE_PARENT;
+        }
 
         if (\Yii::$app->request->isAjax) {
             $model->load(Yii::$app->request->post());
@@ -98,54 +171,7 @@ class HospitalController extends Controller
             if ($model->hospital_type == Hospital::TYPE_PARENT) {
                 $model->setScenario(Hospital::SCENARIO_CREATE_PARENT_HOSPITAL);
             }
-            if($model->validate() && $model->save()) {
-                
-                $model->file = \yii\web\UploadedFile::getInstance($model, 'file');
-                $model->galleryFiles = \yii\web\UploadedFile::getInstances($model, 'galleryFiles');
-                
-                $model->uploadGallery();
-                $model->uploadLogo();
 
-                $schedule = Yii::$app->request->post("Hospital")['schedule'];
-
-                if (count($schedule)) {
-                    $model->unlinkAll('schedules', true);
-                    foreach ($schedule['day'] as $i => $days) {
-                        $scheduleModel = new \common\models\HospitalShedule();
-                        $scheduleModel->hospital_id = $model->primaryKey;
-                        $scheduleModel->day = $days;
-                        $scheduleModel->time = $schedule['time'][$i];
-                        if ($scheduleModel->validate()) {
-                            $scheduleModel->save();
-                        }
-                    }
-                }
-                
-                return $this->redirect(['view', 'id' => $model->id]);
-                  
-            }
-        } 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing Hospital model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        $model->hospital_type = Hospital::TYPE_ALONE;
-        if($model->parent_id) {
-            $model->hospital_type = Hospital::TYPE_PARENT;
-        }
-
-        if ($model->load(Yii::$app->request->post())) {
             if($model->validate() && $model->save()) {
                 $model->file = \yii\web\UploadedFile::getInstance($model, 'file');
                 $model->galleryFiles = \yii\web\UploadedFile::getInstances($model, 'galleryFiles');
@@ -172,6 +198,7 @@ class HospitalController extends Controller
                 
             }
         }
+        //echo "<pre>"; print_r($model->getErrors()); exit;
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -222,6 +249,22 @@ class HospitalController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionDeleteImage() {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $request = Yii::$app->request;
+            $hospitalId = $request->post('hospitalId');
+            $model = $this->findModel($hospitalId);
+            $model->logo = null;
+            if($model->save(false)) {
+                @unlink(Yii::getAlias('@frontend') . '/web/uploads/hospitals/' . $model->primaryKey . '/logo.jpg');
+                echo \yii\helpers\Json::encode([
+                    'success' => true,
+                ]);
+                Yii::$app->end();
+            }
         }
     }
 }

@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-7 col-sm-8">
         <a class="hospital_name" href="/hospital/view/<?php echo $model->primaryKey; ?>">
-            <b class="hospital_name inline-block">TEST</b>
+            <b class="hospital_name inline-block"><?php echo $model->title; ?></b>
         </a>
         <input disabled="disabled" value="5" type="number" class="input-21e rating hidden-xs form-control" min="0" max="5" step="1" data-size="xs"/><br/>
             <?php if (count($model->childHospitals) == 0 && count($model->specializations)) { ?>
@@ -54,9 +54,11 @@
             </div>
         </div><br/>
         <div class="hospital_location left">
+            <!--
             <span class="left fa fa-lg fa-map-marker"></span>
-            <address class="left">112 East 32th Street<br/>
-                New York, NY 10016</address>
+            <address class="left"><?php echo $model->address; ?><br/>
+                Харьков</address>
+            -->
         </div>
     </div>
 </div>
@@ -90,7 +92,7 @@
             </div>
             <div class="col-md-7 col-sm-8">
                 <a class="hospital_name" href="/hospital/view/<?php echo $hospital->primaryKey; ?>">
-                    <b class="hospital_name inline-block">TEST</b>
+                    <b class="hospital_name inline-block"><?php echo $hospital->title; ?></b>
                 </a>
                 <input disabled="disabled" value="5" type="number" class="input-21e rating hidden-xs form-control" min="0" max="5" step="1" data-size="xs"/><br/>
                 <?php if (count($hospital->specializations)) { ?>
@@ -121,8 +123,8 @@
                 </div><br/>
                 <div class="hospital_location left">
                     <span class="left fa fa-lg fa-map-marker"></span>
-                    <address class="left">112 East 32th Street<br/>
-                        New York, NY 10016</address>
+                    <address class="left"><?php echo $hospital->address; ?><br/>
+                        Харьков</address>
                 </div>
             </div>
         </div>

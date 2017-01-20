@@ -45,14 +45,14 @@ class Hospital extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id, hospital_type'], 'integer'],
-            [['title', 'address', 'phone', 'hospital_type', 'description', 'latitude', 'longitude'], 'required', 'on' => self::SCENARIO_DEFAULT],
+            [['parent_id, hospital_type', 'city_id'], 'integer'],
+            [['title', 'address', 'phone', 'hospital_type', 'description', 'latitude', 'longitude', 'city_id'], 'required', 'on' => self::SCENARIO_DEFAULT],
             [['description'], 'string'],
             [['latitude', 'longitude'], 'number'],
             [['title', 'address', 'email', 'phone', 'logo'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => 'png, jpg'],
 
-            [['hospital_type', 'title', 'description'], 'required', 'on' => self::SCENARIO_CREATE_PARENT_HOSPITAL],
+            [['hospital_type', 'title', 'description', 'city_id'], 'required', 'on' => self::SCENARIO_CREATE_PARENT_HOSPITAL],
 
             [['galleryFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
             [['specializations'], 'safe']
@@ -63,10 +63,10 @@ class Hospital extends \yii\db\ActiveRecord
     {
         return [
             self::SCENARIO_DEFAULT => [
-                'hospital_type', 'parent_id', 'title', 'description', 'address', 'phone', 'latitude', 'longitude', 'email', 'file', 'galleryFiles', 'specializations'
+                'hospital_type', 'parent_id', 'city_id', 'title', 'description', 'address', 'phone', 'latitude', 'longitude', 'email', 'file', 'galleryFiles', 'specializations'
             ],
             self::SCENARIO_CREATE_PARENT_HOSPITAL => [
-                'hospital_type', 'title', 'description', 'specializations'
+                'hospital_type', 'title', 'description', 'specializations', 'city_id'
             ]
         ];
     }
@@ -95,6 +95,8 @@ class Hospital extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app/backend', 'ID'),
             'parent_id' => Yii::t('app/backend', 'Parent ID'),
+            'parent_id' => Yii::t('app/backend', 'Parent ID'),
+            'city_id' => Yii::t('app/backend', 'City ID'),
             'title' => Yii::t('app/backend', 'Title'),
             'description' => Yii::t('app/backend', 'Description'),
             'address' => Yii::t('app/backend', 'Address'),
@@ -138,6 +140,7 @@ class Hospital extends \yii\db\ActiveRecord
             }
             $this->file->saveAs($path . '/logo.jpg');
             $this->logo = 'logo.jpg';
+            $this->detachBehaviors();
             $this->save(false);
         }        
     }
@@ -171,5 +174,10 @@ class Hospital extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Specialization::className(), ['id' => 'specialization_id'])
             ->viaTable('hospital_specialization', ['hospital_id' => 'id']);
+    }
+
+    public function getCity()
+    {
+        return $this->hasOne(City::className(), ['id' => 'city_id']);
     }
 }

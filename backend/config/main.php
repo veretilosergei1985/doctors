@@ -75,6 +75,7 @@ return [
                 'doctor/delete-image' => 'doctor/delete-image',
                 'hospitals' => 'hospital/index',
                 'hospital/delete-schedule' => 'hospital/delete-schedule',
+                'hospital-gallery/delete-image' => 'hospital-gallery/delete-image',
                 'stations' => 'metro-station/index',
                 'cities' => 'city/index',
             ],

@@ -3,12 +3,12 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 
-$this->title = Yii::t('app/backend', 'Cities');
+$this->title = Yii::t('app/backend', 'Districts');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="city-index">
+<div class="district-index">
 
-    <p><?= Html::a(Yii::t('app/backend', 'Create City'), ['create'], ['class' => 'btn btn-success']) ?></p>
+    <p><?= Html::a(Yii::t('app/backend', 'Create District'), ['create'], ['class' => 'btn btn-success']) ?></p>
 
     <?php
     $gridColumns = [
@@ -18,18 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'width' => '36px',
             'header' => '',
             'headerOptions' => ['class' => 'kartik-sheet-style']
-        ],
-        [
-            'class' => 'kartik\grid\ExpandRowColumn',
-            'width' => '50px',
-            'value' => function ($model, $key, $index, $column) {
-                return GridView::ROW_COLLAPSED;
-            },
-            'detail' => function ($model, $key, $index, $column) {
-                return Yii::$app->controller->renderPartial('_expand-row-details', ['model'=>$model]);
-            },
-            'headerOptions' => ['class'=>'kartik-sheet-style'],
-            'expandOneOnly' => true
         ],
         [
             'class' => 'kartik\grid\EditableColumn',
@@ -45,9 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'class' => 'kartik\grid\EditableColumn',
-            'attribute' => 'code',
+            'attribute' => 'description',
             'editableOptions' => [
-                'header' => 'Code',
+                'header' => 'Description',
                 //'inputType' => \kartik\editable\Editable::INPUT_SPIN,
             ],
             'hAlign' => 'right',
@@ -66,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'districts' => function ($url,$model,$key) {
                     return Html::a(
                         '<span class="glyphicon glyphicon-home"></span>',
-                        \yii\helpers\Url::to(['/district', 'city_id' => $key]));
+                        \yii\helpers\Url::to(['/district', 'cityId' => $key]));
                 },
             ],
         ],

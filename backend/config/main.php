@@ -72,6 +72,7 @@ return [
 //                'site/login' => 'site/login',
                 'doctors' => 'doctor/index',
                 'doctor/info/<id:\d+>' => 'doctor/info',
+                'district/get-all' => 'district/get-all',
                 'doctor/delete-image' => 'doctor/delete-image',
                 'hospitals' => 'hospital/index',
                 'hospital/delete-schedule' => 'hospital/delete-schedule',

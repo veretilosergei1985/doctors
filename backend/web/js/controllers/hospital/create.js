@@ -125,6 +125,69 @@ doctorBackend.controllers.hospital.create = (function ($) {
 
             });
 
+            $('#hospital-city_id').change(function () {
+                var cityId = $(this).val();
+                if (cityId != '') {
+                    $.when(
+                        $.get('/district/get-all', { city_id: cityId }, function (data) {
+                            var obj = $.parseJSON(data);
+                            if (obj.success == true) {
+                                $('#hospital-district_id option:not(:first)').remove().end();
+                                $.each(obj.data, function (i, item) {
+                                    $('#hospital-district_id').append($('<option>', {
+                                        value: item.id,
+                                        text : item.title
+                                    }));
+                                });
+
+
+                            }
+                        })
+                    ).then(function() {
+                        $.get('/metro/get-all', { city_id: cityId }, function (data) {
+                            var obj = $.parseJSON(data);
+                            if (obj.success == true) {
+                                $('#hospital-metro_id option:not(:first)').remove().end();
+                                $.each(obj.data, function (i, item) {
+                                    $('#hospital-metro_id').append($('<option>', {
+                                        value: item.id,
+                                        text : item.title
+                                    }));
+                                });
+
+
+                            }
+                        })
+                    });
+
+                }
+            });
+
+
+            // populate district drop down using city_id
+            /*
+            $('#hospital-city_id').change(function () {
+                var cityId = $(this).val();
+                if (cityId != '') {
+
+                    $.get('/district/get-all', { city_id: cityId }, function (data) {
+                        var obj = $.parseJSON(data);
+                        if (obj.success == true) {
+                            $('#hospital-district_id option:not(:first)').remove().end();
+                            $.each(obj.data, function (i, item) {
+                                $('#hospital-district_id').append($('<option>', {
+                                    value: item.id,
+                                    text : item.title
+                                }));
+                            });
+
+
+                        }
+                    });
+                }
+            });
+            */
+
             // handle hospital type
             $('input[name="Hospital[hospital_type]"]').change(function () {
                 if($(this).val() == 1) {

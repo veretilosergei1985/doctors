@@ -371,3 +371,11 @@ span.round-tab:hover {
         left: 35%;
     }
 }
+
+.divider {
+    margin-top: 30px;
+    border-bottom: 1px dashed #ccc;
+    margin-left: -100%;
+    width: 300%;
+    margin-bottom: 30px;
+}

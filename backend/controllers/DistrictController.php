@@ -4,6 +4,7 @@ namespace backend\controllers;
 use backend\models\DistrictSearch;
 use common\models\District;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Json;
 
 class DistrictController extends \yii\web\Controller
 {
@@ -41,14 +42,60 @@ class DistrictController extends \yii\web\Controller
         ]);
     }
 
-    public function actionDelete()
+    /**
+     * Updates an existing District model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
     {
-        return $this->render('delete');
+        $model = $this->findModel($id);
+
+        if ($model->load(\Yii::$app->request->post())) {
+            if($model->validate() && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
-    public function actionUpdate()
-    {
-        return $this->render('update');
+    /**
+     * @param $city_id
+     * @return mixed
+     */
+    public function actionGetAll($city_id) {
+        if (\Yii::$app->request->isAjax) {
+            $model = District::find()->all();
+            if($city_id) {
+                $model = District::find()->where(['city_id' => $city_id])->all();
+            }
+            echo Json::encode([
+                'success' => true,
+                'data' => $model,
+            ]);
+            \Yii::$app->end();
+        }
     }
+
+    /**
+     * Finds the District model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return District the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = \common\models\District::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
 
 }

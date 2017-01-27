@@ -21,6 +21,8 @@ class m161101_164905_create_hospital_table extends Migration
             'longitude' => $this->decimal(10, 6),
             'logo' => $this->string(255),
             'city_id' => $this->integer(),
+            'district_id' => $this->integer(),
+            'metro_id' => $this->integer(),
         ]);
 
         $this->createIndex(

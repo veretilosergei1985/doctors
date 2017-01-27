@@ -51,11 +51,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         '<span class="glyphicon glyphicon-pencil"></span>',
                         $url);
                 },
-                'districts' => function ($url,$model,$key) {
-                    return Html::a(
-                        '<span class="glyphicon glyphicon-home"></span>',
-                        \yii\helpers\Url::to(['/district', 'cityId' => $key]));
-                },
             ],
         ],
         [
@@ -74,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
         'headerRowOptions'=>['class'=>'kartik-sheet-style'],
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
-        'pjax'=>true,
+        //'pjax'=>true,
         'toolbar'=> [
             ['content'=>
                 Html::a('<i class="glyphicon glyphicon-plus"></i>', '/city/create',

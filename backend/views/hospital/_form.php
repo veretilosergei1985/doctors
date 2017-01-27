@@ -71,6 +71,10 @@ use kartik\widgets\FileInput;
             ]) ?>
 
             <?= $form->field($model, 'city_id')->dropDownList(ArrayHelper::map(\common\models\City::find()->all(),'id','title'), array('prompt' => Yii::t('app/backend', 'Select city')))->label(Yii::t('app/backend', 'City')); ?>
+
+            <?= $form->field($model, 'district_id')->dropDownList([], array('prompt' => Yii::t('app/backend', 'Select District')))->label(Yii::t('app/backend', 'District')); ?>
+
+            <?= $form->field($model, 'metro_id')->dropDownList([], array('prompt' => Yii::t('app/backend', 'Select Metro')))->label(Yii::t('app/backend', 'Metro Station')); ?>
             
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
@@ -145,7 +149,7 @@ use kartik\widgets\FileInput;
             <div class="">
                 <a id="add-schedule" class="btn btn-success" title="Add Schedule" type="button">
                     <i class="glyphicon glyphicon-plus"></i>
-                </a>                                
+                </a>
                 <?php if(count($model->schedules)) {
                         foreach ($model->schedules as $schedule) {
                 ?>
@@ -154,15 +158,15 @@ use kartik\widgets\FileInput;
                         <?= Html::input('text', 'Hospital[schedule][time][]', $schedule->time, ['id' => 'schedule-time', 'class' => 'form-control col-xs-2', 'placeholder' => Yii::t('app/backend', 'time')]) ?>
                         <button class="btn btn-danger remove-schedule">-</button>
                     </div>
-                <?php 
+                <?php
                         }
-                     } else { 
+                     } else {
                ?>
                 <div class="schedule-fields">
                     <?= Html::input('text', 'Hospital[schedule][day][]', null, ['id' => 'schedule-day', 'class' => 'form-control col-xs-2', 'placeholder' => Yii::t('app/backend', 'day(s)')]) ?>
                     <?= Html::input('text', 'Hospital[schedule][time][]', null, ['id' => 'schedule-time', 'class' => 'form-control col-xs-2', 'placeholder' => Yii::t('app/backend', 'time')]) ?>
                     <button style="visibility: hidden;" class="btn btn-danger remove-schedule">-</button>
-                </div>                
+                </div>
                 <?php } ?>
             </div>
 
@@ -176,7 +180,6 @@ use kartik\widgets\FileInput;
                     'allowClear' => true
                 ],
             ])->label(Yii::t('app/backend', 'Specializations')); ?>
-
 
         </div>
     </div>
